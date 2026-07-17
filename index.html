@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Jefe — say it out loud, get the paperwork</title>
+<meta name="description" content="Jefe turns a spoken walk-through into a finished estimate, invoice, or report — ready to send before you're back in the truck. Free iPhone beta for landscapers, property managers & home inspectors." />
+
+<!-- Open Graph / iMessage / social preview -->
+<meta property="og:title" content="Jefe — say it out loud, get the paperwork" />
+<meta property="og:description" content="Walk the job, talk it through, and Jefe writes up the estimate. Try the free iPhone beta." />
+<meta property="og:type" content="website" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Barlow+Semi+Condensed:wght@500;600&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    /* Field Instrument palette — matches the Jefe app */
+    --paper:      #F6F4EC;
+    --paper-deep: #EFEBDD;
+    --sheet:      #FBFAF4;
+    --ink:        #17150F;
+    --ink-70:     #46433A;
+    --ink-45:     #726E62;
+    --ink-25:     #A9A497;
+    --amber:      #FFBB26;
+    --amber-deep: #9A6A00;
+    --amber-tint: #FAF1D9;
+    --on-amber:   #141412;
+    --hairline:   #DAD5C6;
+    --red:        #B23B2E;
+    --green:      #3E6B35;
+
+    --ui:   'Barlow', system-ui, sans-serif;
+    --cond: 'Barlow Semi Condensed', 'Barlow', sans-serif;
+    --mono: 'IBM Plex Mono', ui-monospace, monospace;
+    --serif:'Source Serif 4', Georgia, serif;
+
+    --pad: clamp(20px, 5vw, 40px);
+    --maxw: 880px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  /* grid/flex children default to min-width:auto, which lets long lines push a
+     cell wider than the viewport → horizontal overflow. Reset it everywhere. */
+  .hero-grid > *, .beats > *, .beat, .step > *, .trust .grid > *,
+  .paper-card .row > *, footer .wrap > * { min-width: 0; }
+  .hero .fine, .paper-card .row .desc, .step p, .beat p { overflow-wrap: anywhere; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--ui);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    /* faint carbon-form ruling */
+    background-image: repeating-linear-gradient(
+      to bottom, transparent, transparent 39px, rgba(0,0,0,0.018) 39px, rgba(0,0,0,0.018) 40px);
+  }
+  a { color: inherit; }
+  img { max-width: 100%; }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--pad); }
+
+  /* ---- reusable bits ---- */
+  .kicker {
+    font-family: var(--mono); font-weight: 600; font-size: 12px;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--amber-deep);
+  }
+  .stamp {
+    display: inline-block; font-family: var(--mono); font-weight: 600;
+    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 3px 7px 2px; background: var(--amber-tint);
+    color: var(--amber-deep); border: 1px solid var(--amber);
+  }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    font-family: var(--ui); font-weight: 700; font-size: 15px; letter-spacing: 0.04em;
+    text-transform: uppercase; text-decoration: none; cursor: pointer;
+    padding: 15px 26px; border: 2px solid var(--ink); background: var(--amber);
+    color: var(--on-amber); transition: transform .12s ease, box-shadow .12s ease;
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+  .btn:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--ink); }
+  .btn:active { transform: translate(2px,2px); box-shadow: 1px 1px 0 var(--ink); }
+  .btn.ghost { background: transparent; color: var(--ink); box-shadow: none; }
+  .btn.ghost:hover { background: var(--paper-deep); transform: none; }
+
+  .logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+  .logo .mark { width: 22px; height: 22px; background: var(--amber-deep); flex: none; }
+  .logo .word { font-family: var(--ui); font-weight: 800; font-size: 22px; letter-spacing: 0.02em; }
+
+  /* reveal-on-scroll */
+  .reveal { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* ---- top bar ---- */
+  header.bar {
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(246,244,236,0.92); backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--hairline);
+  }
+  header.bar .wrap { display: flex; align-items: center; justify-content: space-between; height: 62px; }
+  header.bar .meta { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; color: var(--ink-45); text-transform: uppercase; }
+
+  /* ---- hero ---- */
+  .hero { padding: clamp(38px, 8vw, 80px) 0 clamp(30px, 6vw, 60px); }
+  .hero h1 {
+    font-family: var(--ui); font-weight: 800; letter-spacing: -0.01em;
+    font-size: clamp(38px, 9vw, 68px); line-height: 1.02; margin: 14px 0 0;
+  }
+  .hero .lead {
+    font-family: var(--serif); font-size: clamp(17px, 2.4vw, 21px); color: var(--ink-70);
+    max-width: 30ch; margin: 20px 0 0; line-height: 1.5;
+  }
+  .hero .ctas { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+  .hero .fine {
+    margin-top: 20px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em;
+    color: var(--ink-45);
+  }
+  .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(24px, 5vw, 48px); align-items: center; }
+  @media (max-width: 720px) { .hero-grid { grid-template-columns: 1fr; } }
+
+  /* mini estimate card (echoes the app) */
+  .paper-card {
+    background: var(--paper-deep); border: 1.5px solid var(--hairline); padding: 16px;
+    box-shadow: 8px 8px 0 rgba(23,21,15,0.06);
+  }
+  .paper-card .row {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 10px;
+    background: var(--sheet); border: 1px solid var(--hairline); padding: 11px 12px; margin-top: 10px;
+  }
+  .paper-card .row .desc { font-family: var(--cond); font-weight: 600; font-size: 15px; }
+  .paper-card .row .amt  { font-family: var(--mono); font-weight: 600; font-size: 14px; color: var(--amber-deep); }
+  .paper-card .head { display: flex; align-items: center; justify-content: space-between; }
+  .paper-card .biz { font-family: var(--serif); font-weight: 700; font-size: 16px; }
+  .paper-card .send {
+    margin-top: 12px; text-align: center; font-family: var(--ui); font-weight: 700; font-size: 12px;
+    letter-spacing: 0.08em; padding: 11px; background: var(--amber); color: var(--on-amber); text-transform: uppercase;
+  }
+  .sub { font-family: var(--mono); font-size: 9px; letter-spacing: 0.06em; color: var(--ink-45); text-transform: uppercase; }
+
+  /* ---- section frame ---- */
+  section { padding: clamp(40px, 8vw, 74px) 0; }
+  .divider { border: none; border-top: 2px dashed var(--hairline); margin: 0; }
+  .sec-head h2 {
+    font-family: var(--ui); font-weight: 800; font-size: clamp(26px, 5vw, 38px);
+    letter-spacing: -0.01em; margin: 8px 0 0; line-height: 1.08;
+  }
+  .sec-head .sub-lead { font-family: var(--serif); color: var(--ink-70); font-size: 17px; margin: 12px 0 0; max-width: 52ch; }
+
+  /* ---- how it works ---- */
+  .beats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 34px; }
+  @media (max-width: 720px) { .beats { grid-template-columns: 1fr; } }
+  .beat { background: var(--sheet); border: 1.5px solid var(--hairline); padding: 20px; }
+  .beat .n { font-family: var(--mono); font-weight: 600; font-size: 12px; color: var(--amber-deep); letter-spacing: 0.1em; }
+  .beat h3 { font-family: var(--ui); font-weight: 700; font-size: 20px; margin: 10px 0 8px; }
+  .beat p { font-family: var(--serif); color: var(--ink-70); font-size: 15.5px; margin: 0; }
+
+  /* ---- install steps ---- */
+  .steps { margin-top: 34px; border-top: 1px solid var(--hairline); }
+  .step {
+    display: grid; grid-template-columns: 58px 1fr; gap: 18px; align-items: start;
+    padding: 22px 4px; border-bottom: 1px solid var(--hairline);
+  }
+  .step .idx {
+    font-family: var(--mono); font-weight: 600; font-size: 22px; color: var(--amber-deep);
+    border: 1.5px solid var(--amber); background: var(--amber-tint); width: 48px; height: 48px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .step h3 { font-family: var(--ui); font-weight: 700; font-size: 20px; margin: 4px 0 6px; }
+  .step p { font-family: var(--serif); color: var(--ink-70); font-size: 16px; margin: 0 0 12px; max-width: 56ch; }
+  .step .mini-note { font-family: var(--mono); font-size: 12px; color: var(--ink-45); letter-spacing: 0.02em; }
+  .step .btn { font-size: 13px; padding: 11px 18px; box-shadow: 3px 3px 0 var(--ink); }
+  .step .btn:hover { box-shadow: 5px 5px 0 var(--ink); }
+
+  .notebar {
+    margin-top: 26px; display: flex; gap: 0; border: 1.5px solid var(--amber);
+    background: var(--amber-tint);
+  }
+  .notebar .tick { width: 5px; background: var(--amber); flex: none; }
+  .notebar .txt { padding: 14px 16px; font-family: var(--cond); font-weight: 600; font-size: 15px; color: var(--ink); }
+
+  /* ---- trust strip ---- */
+  .trust { background: var(--ink); color: var(--paper); }
+  .trust .wrap { padding-top: clamp(40px,7vw,64px); padding-bottom: clamp(40px,7vw,64px); }
+  .trust .kicker { color: var(--amber); }
+  .trust h2 { color: var(--paper); }
+  .trust .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 30px; }
+  @media (max-width: 720px) { .trust .grid { grid-template-columns: 1fr; } }
+  .trust .item h3 { font-family: var(--ui); font-weight: 700; font-size: 18px; margin: 0 0 8px; }
+  .trust .item p { font-family: var(--serif); color: #D8D3C4; font-size: 15px; margin: 0; }
+  .trust .item .ic { font-family: var(--mono); color: var(--amber); font-size: 13px; letter-spacing: 0.1em; }
+
+  /* ---- waitlist ---- */
+  .waitlist .card {
+    margin-top: 30px; background: var(--sheet); border: 2px solid var(--ink);
+    box-shadow: 8px 8px 0 rgba(23,21,15,0.10); padding: clamp(22px, 4vw, 34px);
+  }
+  .field { display: block; margin-top: 16px; }
+  .field label { display: block; font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-45); margin-bottom: 7px; }
+  .field input, .field select {
+    width: 100%; font-family: var(--ui); font-size: 16px; color: var(--ink);
+    padding: 13px 14px; background: var(--paper); border: 1.5px solid var(--hairline);
+    border-radius: 0; -webkit-appearance: none; appearance: none;
+  }
+  .field input:focus, .field select:focus { outline: none; border-color: var(--amber-deep); box-shadow: inset 0 0 0 1px var(--amber-deep); }
+  .field select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239A6A00' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; }
+  form .btn { width: 100%; margin-top: 22px; }
+  .honeypot { position: absolute; left: -9999px; }
+  .form-msg { margin-top: 14px; font-family: var(--cond); font-weight: 600; font-size: 15px; display: none; }
+  .form-msg.ok { display: block; color: var(--green); }
+  .form-msg.err { display: block; color: var(--red); }
+
+  /* ---- footer ---- */
+  footer { border-top: 2px solid var(--ink); padding: 34px 0 46px; }
+  footer .wrap { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; }
+  footer .fine { font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em; color: var(--ink-45); }
+  footer a.link { color: var(--amber-deep); text-decoration: none; border-bottom: 1px solid var(--amber); }
+</style>
+</head>
+
+<body>
+
+<!-- ============ TOP BAR ============ -->
+<header class="bar">
+  <div class="wrap">
+    <a class="logo" href="#top"><span class="mark"></span><span class="word">JEFE</span></a>
+    <span class="meta">Field beta</span>
+  </div>
+</header>
+
+<a id="top"></a>
+
+<!-- ============ HERO ============ -->
+<div class="hero wrap">
+  <div class="hero-grid">
+    <div>
+      <span class="stamp">Free iPhone beta</span>
+      <h1 class="reveal">Say it out&nbsp;loud.<br>Get the paperwork.</h1>
+      <p class="lead reveal">Walk the job and talk — like you're telling a helper. Jefe writes up the estimate, invoice, or report, ready to send before you're back in the truck.</p>
+      <div class="ctas reveal">
+        <a class="btn" href="#install">Get the beta →</a>
+        <a class="btn ghost" href="#waitlist">Join the waitlist</a>
+      </div>
+      <p class="fine reveal">iPhone · for landscapers, property managers &amp; home inspectors</p>
+    </div>
+
+    <!-- mini estimate: the payoff, shown up front -->
+    <div class="paper-card reveal" aria-hidden="true">
+      <div class="head">
+        <span class="biz">Alder Court Lawn</span>
+        <span class="sub" style="color:var(--amber-deep)">Estimate</span>
+      </div>
+      <div class="row"><span class="desc">Bark mulch — front beds</span><span class="amt">$285</span></div>
+      <div class="row"><span class="desc">Trim &amp; haul — boxwoods</span><span class="amt">$140</span></div>
+      <div class="row"><span class="desc">Bed edging — 60 lf</span><span class="amt">$255</span></div>
+      <div class="send">Send estimate</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider" />
+
+<!-- ============ HOW IT WORKS ============ -->
+<section id="how">
+  <div class="wrap sec-head reveal">
+    <span class="kicker">How it works</span>
+    <h2>Three steps. No typing.</h2>
+    <p class="sub-lead">If you can talk through a job, you can use Jefe. Nothing to learn.</p>
+  </div>
+  <div class="wrap beats">
+    <div class="beat reveal">
+      <div class="n">01</div>
+      <h3>Walk &amp; talk</h3>
+      <p>Tap once, then just talk. Jefe listens the whole time and writes down what matters.</p>
+    </div>
+    <div class="beat reveal">
+      <div class="n">02</div>
+      <h3>Fix anything</h3>
+      <p>It's a first draft. Tap any line to fix a word or add a price. You're always in control.</p>
+    </div>
+    <div class="beat reveal">
+      <div class="n">03</div>
+      <h3>One tap → paperwork</h3>
+      <p>Turn it into an estimate, invoice, or report — with your logo on it. Then text or email it.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ============ INSTALL STEPS ============ -->
+<section id="install">
+  <div class="wrap sec-head reveal">
+    <span class="kicker">Get it on your phone</span>
+    <h2>4 steps, about 2 minutes.</h2>
+    <p class="sub-lead">Jefe isn't on the App Store yet — you'll get it through TestFlight, Apple's official free app for trying apps early. Open this page <strong>on your iPhone</strong> and follow along.</p>
+  </div>
+
+  <div class="wrap steps">
+    <div class="step reveal">
+      <div class="idx">1</div>
+      <div>
+        <h3>Install TestFlight</h3>
+        <p>TestFlight is a free Apple app for trying apps before they hit the App Store. Get it once — you'll open Jefe through it.</p>
+        <a class="btn" href="https://apps.apple.com/app/testflight/id899247664" target="_blank" rel="noopener">Get TestFlight →</a>
+      </div>
+    </div>
+
+    <div class="step reveal">
+      <div class="idx">2</div>
+      <div>
+        <h3>Tap the Jefe invite</h3>
+        <p>Open this button on your iPhone and tap <strong>Accept</strong>. It opens right inside TestFlight.</p>
+        <!-- ⬇⬇ REPLACE the href with your real public TestFlight join link (testflight.apple.com/join/XXXXXXXX) ⬇⬇ -->
+        <a class="btn" id="tf-link" href="https://testflight.apple.com/join/XXXXXXXX" target="_blank" rel="noopener">Open the Jefe invite →</a>
+        <p class="mini-note" style="margin-top:10px">On a computer? Text yourself this page and open it on your iPhone.</p>
+      </div>
+    </div>
+
+    <div class="step reveal">
+      <div class="idx">3</div>
+      <div>
+        <h3>Tap “Install”</h3>
+        <p>In TestFlight, tap <strong>Install</strong> (or Update). Jefe lands on your home screen like any app.</p>
+        <p class="mini-note">Heads up: it may show up as “Sitewalk” — that's us, an earlier name.</p>
+      </div>
+    </div>
+
+    <div class="step reveal">
+      <div class="idx">4</div>
+      <div>
+        <h3>Open it and walk</h3>
+        <p>Open the app, try the built-in practice walk to see how it works, then do a real one. That's it — you're going.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="notebar reveal">
+      <div class="tick"></div>
+      <div class="txt">iPhone only for now — that's where TestFlight lives. On Android? Join the waitlist below and we'll tell you the moment it's ready.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRUST ============ -->
+<section class="trust">
+  <div class="wrap sec-head reveal">
+    <span class="kicker">Why it's different</span>
+    <h2>Built for the field, not the office.</h2>
+  </div>
+  <div class="wrap grid">
+    <div class="item reveal">
+      <div class="ic">// PRIVATE</div>
+      <h3>Your audio never leaves your phone</h3>
+      <p>The listening happens on your device. We're not shipping your voice to the cloud.</p>
+    </div>
+    <div class="item reveal">
+      <div class="ic">// YOURS</div>
+      <h3>You're in control of every word</h3>
+      <p>What Jefe hears is a first draft. Every line, price, and note is yours to change.</p>
+    </div>
+    <div class="item reveal">
+      <div class="ic">// EARLY</div>
+      <h3>You're an early tester</h3>
+      <p>It's a small team and a real beta. Tell us what's clunky — it shapes what we build next.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WAITLIST ============ -->
+<section id="waitlist" class="waitlist">
+  <div class="wrap sec-head reveal">
+    <span class="kicker">Stay in the loop</span>
+    <h2>Join the waitlist.</h2>
+    <p class="sub-lead">Not ready to install, on Android, or just want updates? Drop your email and we'll keep you posted — including when the full version launches.</p>
+  </div>
+
+  <div class="wrap">
+    <div class="card reveal">
+      <!-- ⬇⬇ REPLACE the action URL with your Formspree endpoint (https://formspree.io/f/YOUR_FORM_ID) ⬇⬇ -->
+      <form id="waitlist-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" type="email" name="email" required autocomplete="email" placeholder="you@email.com" />
+        </div>
+        <div class="field">
+          <label for="trade">What do you do? (optional)</label>
+          <select id="trade" name="trade">
+            <option value="">Choose one…</option>
+            <option>Landscaping / lawn care</option>
+            <option>Property management</option>
+            <option>Home / property inspection</option>
+            <option>Other field / trade work</option>
+          </select>
+        </div>
+        <!-- spam trap -->
+        <input class="honeypot" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <button class="btn" type="submit">Join the waitlist</button>
+        <p class="form-msg" id="form-msg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <a class="logo" href="#top"><span class="mark"></span><span class="word">JEFE</span></a>
+    <div class="fine">
+      Voice to paperwork for the field. · Your audio never leaves your phone.<br>
+      Questions? <a class="link" href="mailto:isaacwm23@gmail.com">isaacwm23@gmail.com</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Reveal-on-scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.transitionDelay = Math.min(i % 4, 3) * 60 + 'ms';
+    io.observe(el);
+  });
+
+  // Waitlist — submit to Formspree via fetch so we never leave the page.
+  const form = document.getElementById('waitlist-form');
+  const msg = document.getElementById('form-msg');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (form.action.includes('YOUR_FORM_ID')) {
+      msg.className = 'form-msg err';
+      msg.textContent = 'Waitlist isn’t hooked up yet — add your Formspree ID to go live.';
+      return;
+    }
+    msg.className = 'form-msg'; msg.textContent = '';
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        form.reset();
+        msg.className = 'form-msg ok';
+        msg.textContent = "You're on the list — thanks. We'll be in touch.";
+      } else {
+        msg.className = 'form-msg err';
+        msg.textContent = 'Something went wrong. Try again, or email us directly.';
+      }
+    } catch (_) {
+      msg.className = 'form-msg err';
+      msg.textContent = 'Network hiccup. Try again in a moment.';
+    }
+  });
+</script>
+</body>
+</html>
