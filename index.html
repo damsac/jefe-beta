@@ -38,7 +38,7 @@
     --mono: 'IBM Plex Mono', ui-monospace, monospace;
     --serif:'Source Serif 4', Georgia, serif;
 
-    --pad: clamp(20px, 5vw, 40px);
+    --pad: clamp(26px, 6vw, 44px);
     --maxw: 880px;
   }
 
@@ -107,7 +107,9 @@
   header.bar .meta { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; color: var(--ink-45); text-transform: uppercase; }
 
   /* ---- hero ---- */
-  .hero { padding: clamp(38px, 8vw, 80px) 0 clamp(30px, 6vw, 60px); }
+  /* top/bottom only — leave .wrap's horizontal padding intact (a `padding`
+     shorthand here would zero the side margins and flush content left). */
+  .hero { padding-top: clamp(38px, 8vw, 80px); padding-bottom: clamp(30px, 6vw, 60px); }
   .hero h1 {
     font-family: var(--ui); font-weight: 800; letter-spacing: -0.01em;
     font-size: clamp(38px, 9vw, 68px); line-height: 1.02; margin: 14px 0 0;
@@ -414,7 +416,8 @@
     <a class="logo" href="#top"><span class="mark"></span><span class="word">JEFE</span></a>
     <div class="fine">
       Voice to paperwork for the field. · Your audio never leaves your phone.<br>
-      Questions? <a class="link" href="mailto:isaacwm23@gmail.com">isaacwm23@gmail.com</a>
+      <a class="link" href="/terms">Terms</a> · <a class="link" href="/privacy">Privacy</a> ·
+      Questions? <a class="link" href="mailto:damsac.app@gmail.com">damsac.app@gmail.com</a>
     </div>
   </div>
 </footer>
