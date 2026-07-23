@@ -384,8 +384,16 @@
 
   <div class="wrap">
     <div class="card reveal">
-      <!-- ⬇⬇ REPLACE the action URL with your Formspree endpoint (https://formspree.io/f/YOUR_FORM_ID) ⬇⬇ -->
-      <form id="waitlist-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <!-- Netlify Forms: no third-party service. Netlify captures submissions on
+           deploy (data-netlify) and emails damsac.app@gmail.com per submission
+           once the email notification is enabled in the Netlify dashboard. -->
+      <form id="waitlist-form" name="waitlist" method="POST"
+            data-netlify="true" netlify-honeypot="company-website">
+        <input type="hidden" name="form-name" value="waitlist" />
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" type="text" name="name" required autocomplete="name" placeholder="Your name" />
+        </div>
         <div class="field">
           <label for="email">Email</label>
           <input id="email" type="email" name="email" required autocomplete="email" placeholder="you@email.com" />
@@ -400,8 +408,8 @@
             <option>Other field / trade work</option>
           </select>
         </div>
-        <!-- spam trap -->
-        <input class="honeypot" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <!-- spam trap (Netlify silently drops submissions that fill this) -->
+        <p class="honeypot"><label>Leave this empty: <input name="company-website" tabindex="-1" autocomplete="off" /></label></p>
         <button class="btn" type="submit">Join the waitlist</button>
         <p class="form-msg" id="form-msg" role="status" aria-live="polite"></p>
       </form>
@@ -431,20 +439,19 @@
     io.observe(el);
   });
 
-  // Waitlist — submit to Formspree via fetch so we never leave the page.
+  // Waitlist — submit to Netlify Forms via fetch (URL-encoded POST to the page)
+  // so we capture the submission without leaving the page.
   const form = document.getElementById('waitlist-form');
   const msg = document.getElementById('form-msg');
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    if (form.action.includes('YOUR_FORM_ID')) {
-      msg.className = 'form-msg err';
-      msg.textContent = 'Waitlist isn’t hooked up yet — add your Formspree ID to go live.';
-      return;
-    }
     msg.className = 'form-msg'; msg.textContent = '';
+    const body = new URLSearchParams(new FormData(form)).toString();
     try {
-      const res = await fetch(form.action, {
-        method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' }
+      const res = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body
       });
       if (res.ok) {
         form.reset();
