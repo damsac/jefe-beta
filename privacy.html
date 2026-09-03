@@ -61,47 +61,70 @@
 <main>
   <span class="kicker">Legal</span>
   <h1>Privacy Policy</h1>
-  <p class="updated">Last updated: August 30, 2026</p>
+  <p class="updated">Last updated: September 2, 2026</p>
 
-  <div class="callout"><strong>The short version:</strong> Your audio never leaves your phone. Speech is turned into text right on the device. To build your paperwork, only the <em>text</em> is sent to our AI provider. We don't sell your data, and we don't use your voice in the cloud.</div>
+  <div class="callout">
+    <p><strong>The short version:</strong> Your audio never leaves your phone. Speech is turned into text right on the device. To build your paperwork, only the <strong>text</strong> is sent to Anthropic&rsquo;s AI service. Your work is never used to train AI models, we don&rsquo;t sell your data, and there are no ads or trackers.</p>
+  </div>
 
   <h2>What Jefe does with your voice</h2>
-  <p>When you record a walk, the speech-to-text happens <strong>on your device</strong>. Your audio recordings are not uploaded to us or to anyone else. To turn your words into an estimate, invoice, or report, the resulting <strong>text transcript</strong> is sent to a third-party AI processing provider that generates the document and returns it to your device. That text is used only to produce your output; it is not sold, and we do not use it to build advertising profiles.</p>
+  <p>When you record a walk, the speech-to-text happens <strong>on your device</strong>. Your audio recordings are not uploaded to us or to anyone else. To turn your words into an estimate, invoice, or report, the resulting <strong>text transcript</strong> is sent to <strong>Anthropic</strong> (the Claude API), which generates the document and returns it to your device. That text is used only to produce your output; it is not sold, and it is not used to train AI models.</p>
+  <p>Jefe keeps recording while the screen is locked or the app is in your pocket, so a walk isn&rsquo;t cut short. It records only between the moment you start a walk and the moment you finish it.</p>
+
+  <h2>Who else is involved</h2>
+  <p>Being specific about this, because &ldquo;a third-party provider&rdquo; isn&rsquo;t an answer anyone can check:</p>
+  <ul>
+    <li><strong>Anthropic</strong> &mdash; receives the text transcript to write your document. Anthropic holds inputs and outputs briefly to run the request and for automated safety checks, then deletes them; content flagged by those checks may be held longer. Anthropic does not train on it.</li>
+    <li><strong>Cloudflare</strong> &mdash; requests pass through a service we run on Cloudflare, which relays them to Anthropic and counts usage so we can meter costs. Like any web request, it necessarily sees your device&rsquo;s IP address.</li>
+    <li><strong>Apple</strong> &mdash; sells and bills the subscription, and may share crash logs and aggregated usage data with us.</li>
+    <li><strong>Netlify</strong> &mdash; hosts this website and receives waitlist form submissions.</li>
+  </ul>
 
   <h2>What we collect</h2>
   <ul>
-    <li><strong>On your device (not sent to us):</strong> your business details (name, city, license number), your walks, transcripts, photos you take, and the documents you create. These live on your device and are included in documents you choose to share.</li>
-    <li><strong>Transcript text:</strong> sent to our AI provider only to generate your documents, as described above.</li>
-    <li><strong>Waitlist:</strong> if you join the waitlist on our website, we collect the email address (and optional trade) you submit, through our form provider (Formspree), so we can tell you about the app.</li>
-    <li><strong>Diagnostics:</strong> because Jefe is distributed through Apple, Apple may share crash logs, basic usage data, and any feedback you send with us, under Apple's privacy terms.</li>
+    <li><strong>On your device (not sent to us):</strong> your business details (name, city, license number), your walks, transcripts, photos you take, contacts Jefe picks out of what you said, and the documents you create. These live on your device and are included in documents you choose to share.</li>
+    <li><strong>Transcript text:</strong> sent to Anthropic only to generate your documents, as described above.</li>
+    <li><strong>An install identifier:</strong> a random ID created on your device the first time you use Jefe. It contains nothing about you or your phone, and it is what lets us count usage and apply the free-walk allowance without any account or login. <strong>It is stored in the iOS keychain, which means it survives deleting and reinstalling the app</strong> &mdash; deliberately, so reinstalling doesn&rsquo;t reset the free allowance. Your free-walk count is stored the same way.</li>
+    <li><strong>Usage totals:</strong> for each install ID we keep a running daily cost total for three days, plus request logs (time, model, token counts &mdash; never the content).</li>
+    <li><strong>Waitlist:</strong> if you join the waitlist on this website we collect the <strong>name and email address</strong> you submit, and your trade if you give it, through Netlify Forms, so we can tell you about the app.</li>
   </ul>
 
-  <h2>What we don't do</h2>
+  <h2>Other people in your walks</h2>
+  <p>A walk often captures information about people who never installed Jefe &mdash; a client&rsquo;s name and address, a tenant&rsquo;s details, gate and lockbox codes, the condition of someone&rsquo;s home. That information is in the transcript, so it is sent to Anthropic along with everything else, and it stays on your device in your walk history.</p>
+  <p>You are responsible for handling it appropriately, and for telling people when you are recording &mdash; some states legally require their agreement. See section 4 of the <a href="/terms">Terms</a>.</p>
+
+  <h2>What we don&rsquo;t do</h2>
   <ul>
-    <li>We don't upload or store your audio recordings.</li>
-    <li>We don't sell your personal information.</li>
-    <li>We don't show you ads or build advertising profiles.</li>
-    <li>We don't see your payment details. Subscriptions are sold and billed by Apple; your card never touches us.</li>
+    <li>We don&rsquo;t upload or store your audio recordings.</li>
+    <li>We don&rsquo;t sell your personal information.</li>
+    <li>We don&rsquo;t show you ads, build advertising profiles, or track you across apps or websites. Jefe contains no analytics or tracking SDKs of any kind, and we do not respond to Do Not Track signals because we do not track.</li>
+    <li>We don&rsquo;t see your payment details. Subscriptions are sold and billed by Apple; your card never touches us.</li>
+    <li>Your content is not used to train AI models.</li>
   </ul>
 
   <h2>How long we keep it</h2>
-  <p>On-device data stays on your device until you delete it or remove the app. Waitlist emails are kept until you ask us to remove them. Transcript text sent for processing is not retained by us beyond generating your document.</p>
+  <p>On-device data stays on your device until you delete it or remove the app &mdash; with one exception: the install identifier and your free-walk count are kept in the keychain and <strong>survive deleting the app</strong>, as described above. Deleting a walk in the app removes it from your board; the underlying record is marked deleted and stays in the app&rsquo;s local database on your phone.</p>
+  <p>On our side: daily usage totals for three days, request logs (no content) as kept by Cloudflare, and waitlist emails until you ask us to remove them. Transcript text is not retained by us beyond generating your document; Anthropic&rsquo;s own retention is described above.</p>
 
   <h2>Your choices</h2>
   <ul>
-    <li>You can turn off microphone access anytime in iOS Settings (Jefe won't be able to hear your walk).</li>
-    <li>You can delete a walk or document in the app, or remove the app to clear on-device data.</li>
-    <li>You can ask us to delete your waitlist email by emailing us.</li>
+    <li>You can turn off microphone access anytime in iOS Settings (Jefe won&rsquo;t be able to hear your walk).</li>
+    <li>You can delete a walk or document in the app.</li>
+    <li>You can email us to see, correct, or delete what we hold, or to be removed from the waitlist.</li>
+    <li>Because the paperwork is written by Anthropic&rsquo;s AI, there is no way to use Jefe without the transcript text being sent. If you&rsquo;d rather that didn&rsquo;t happen, don&rsquo;t record a walk &mdash; and you can stop entirely by cancelling any subscription and deleting the app.</li>
   </ul>
 
+  <h2>Security</h2>
+  <p>Your walks and documents live on your phone, protected by your device passcode and iOS encryption. Traffic to and from our service is encrypted in transit. Data in Apple&rsquo;s device backups is covered by your iCloud settings. No system is perfect; if we ever learn of a breach affecting your information we&rsquo;ll tell you and any regulator the law requires, promptly.</p>
+
   <h2>Children</h2>
-  <p>Jefe is a tool for working professionals and is not intended for anyone under 18.</p>
+  <p>Jefe is a tool for working tradespeople and is not directed at children. You must be at least 18 to use it.</p>
 
   <h2>Changes</h2>
-  <p>If we change this policy, we'll update the date above. Material changes will be reflected here.</p>
+  <p>If we change this policy we&rsquo;ll update the date above, and if the change is material we&rsquo;ll tell you in the app before it takes effect.</p>
 
   <h2>Contact</h2>
-  <p>Questions about privacy? Email <a href="mailto:damsac.app@gmail.com">damsac.app@gmail.com</a>.</p>
+  <p>Questions, or a request about your information? Email <a href="mailto:damsac.app@gmail.com">damsac.app@gmail.com</a>.</p>
 
   <hr>
   <p style="font-size:14px;color:var(--ink-45)">Jefe is independent software and is not affiliated with or endorsed by Apple Inc. App Store and TestFlight are trademarks of Apple Inc.</p>
