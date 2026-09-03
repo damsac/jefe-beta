@@ -64,7 +64,7 @@
   <p class="updated">Last updated: September 2, 2026</p>
 
   <div class="callout">
-    <p><strong>The short version:</strong> Your audio never leaves your phone. Speech is turned into text right on the device. To build your paperwork, only the <strong>text</strong> is sent to Anthropic&rsquo;s AI service. Your work is never used to train AI models, we don&rsquo;t sell your data, and there are no ads or trackers.</p>
+    <p><strong>The short version:</strong> Your audio never leaves your phone. Speech is turned into text right on the device. To build your paperwork, only the <strong>text</strong> is sent to Anthropic&rsquo;s AI service. Your work is not used to train AI models, we don&rsquo;t sell your data, and there are no ads or trackers.</p>
   </div>
 
   <h2>What Jefe does with your voice</h2>
@@ -74,7 +74,7 @@
   <h2>Who else is involved</h2>
   <p>Being specific about this, because &ldquo;a third-party provider&rdquo; isn&rsquo;t an answer anyone can check:</p>
   <ul>
-    <li><strong>Anthropic</strong> &mdash; receives the text transcript to write your document. Anthropic holds inputs and outputs briefly to run the request and for automated safety checks, then deletes them; content flagged by those checks may be held longer. Anthropic does not train on it.</li>
+    <li><strong>Anthropic</strong> &mdash; receives the text transcript to write your document. Under Anthropic&rsquo;s commercial terms for the API, your content is <strong>not used to train their models</strong>. Anthropic deletes inputs and outputs from its systems <strong>within 30 days</strong>. If their automated safety checks flag something as a policy violation, the content can be kept for up to 2 years and the resulting safety scores for up to 7 years.</li>
     <li><strong>Cloudflare</strong> &mdash; requests pass through a service we run on Cloudflare, which relays them to Anthropic and counts usage so we can meter costs. Like any web request, it necessarily sees your device&rsquo;s IP address.</li>
     <li><strong>Apple</strong> &mdash; sells and bills the subscription, and may share crash logs and aggregated usage data with us.</li>
     <li><strong>Netlify</strong> &mdash; hosts this website and receives waitlist form submissions.</li>
@@ -104,7 +104,7 @@
 
   <h2>How long we keep it</h2>
   <p>On-device data stays on your device until you delete it or remove the app &mdash; with one exception: the install identifier and your free-walk count are kept in the keychain and <strong>survive deleting the app</strong>, as described above. Deleting a walk in the app removes it from your board; the underlying record is marked deleted and stays in the app&rsquo;s local database on your phone.</p>
-  <p>On our side: daily usage totals for three days, request logs (no content) as kept by Cloudflare, and waitlist emails until you ask us to remove them. Transcript text is not retained by us beyond generating your document; Anthropic&rsquo;s own retention is described above.</p>
+  <p>On our side: daily usage totals for three days, request logs (no content) as kept by Cloudflare, and waitlist emails until you ask us to remove them. We do not retain your transcript text at all beyond passing it along to generate your document. <strong>Anthropic keeps it for up to 30 days</strong>, as described above &mdash; so &ldquo;we don&rsquo;t keep it&rdquo; is true of us and not of the whole chain, and you should read those two sentences together.</p>
 
   <h2>Your choices</h2>
   <ul>
