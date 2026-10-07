@@ -158,6 +158,10 @@
   .beat .n { font-family: var(--mono); font-weight: 600; font-size: 12px; color: var(--amber-deep); letter-spacing: 0.1em; }
   .beat h3 { font-family: var(--ui); font-weight: 700; font-size: 20px; margin: 10px 0 8px; }
   .beat p { font-family: var(--serif); color: var(--ink-70); font-size: 15.5px; margin: 0; }
+  .beat .eg {
+    font-family: var(--mono); font-size: 12.5px; line-height: 1.6; color: var(--ink-45);
+    margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--hairline);
+  }
 
   /* ---- install steps ---- */
   .steps { margin-top: 34px; border-top: 1px solid var(--hairline); }
@@ -188,7 +192,9 @@
   .trust .wrap { padding-top: clamp(40px,7vw,64px); padding-bottom: clamp(40px,7vw,64px); }
   .trust .kicker { color: var(--amber); }
   .trust h2 { color: var(--paper); }
-  .trust .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 30px; }
+  .trust .sub-lead { color: #CFC9B8; }
+  .trust .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 36px; }
+  .trust .item { border-top: 1px solid #3A362E; padding-top: 16px; }
   @media (max-width: 720px) { .trust .grid { grid-template-columns: 1fr; } }
   .trust .item h3 { font-family: var(--ui); font-weight: 700; font-size: 18px; margin: 0 0 8px; }
   .trust .item p { font-family: var(--serif); color: #D8D3C4; font-size: 15px; margin: 0; }
@@ -275,17 +281,20 @@
     <div class="beat">
       <div class="n">01</div>
       <h3>Walk &amp; talk</h3>
-      <p>Tap once and talk. Jefe listens the whole time and writes down what matters.</p>
+      <p>Tap once and talk. Jefe listens the whole time and writes down what matters &mdash; even with the phone in your pocket.</p>
+      <p class="eg">&ldquo;Front beds need mulch, call it three yards&hellip; zone two head is broken, replace it.&rdquo;</p>
     </div>
     <div class="beat">
       <div class="n">02</div>
       <h3>Fix anything</h3>
-      <p>It's a first draft. Tap any line to fix a word or put a price on it.</p>
+      <p>It's a first draft, not a verdict. Tap any line to fix a word, change a quantity, or put your price on it.</p>
+      <p class="eg">Jefe flags what it didn't hear, so nothing gets quoted by accident.</p>
     </div>
     <div class="beat">
       <div class="n">03</div>
       <h3>Send it</h3>
-      <p>Turn it into an estimate or invoice with your logo on it, then text or email it.</p>
+      <p>Turn it into an estimate, invoice, work order or report with your letterhead on it.</p>
+      <p class="eg">Text it, email it, or save the PDF before you leave the driveway.</p>
     </div>
   </div>
 </section>
@@ -341,22 +350,23 @@
   <div class="wrap sec-head">
     <span class="kicker">Why it's different</span>
     <h2>Made for the field.</h2>
+    <p class="sub-lead">The three questions people ask before they trust an app with a client's job.</p>
   </div>
   <div class="wrap grid">
     <div class="item">
       <div class="ic">Privacy</div>
       <h3>Your audio never leaves your phone</h3>
-      <p>The listening happens on your device &mdash; we're not shipping your voice to the cloud. Writing the paperwork happens off the phone, so the typed-out words are sent to our processing provider and come back as your document. Your work is not used to train AI models. <a href="/privacy">How it works &rsaquo;</a></p>
+      <p>The listening happens on your device &mdash; your voice is never uploaded. To write the paperwork, the typed-out words go to our AI provider and come back as your document. Your work is never used to train AI models. <a href="/privacy">How it works &rsaquo;</a></p>
     </div>
     <div class="item">
       <div class="ic">Control</div>
       <h3>You're in control of every word</h3>
-      <p>What Jefe hears is a first draft. Every line of it is yours to change.</p>
+      <p>What Jefe hears is a first draft, and every line of it is yours to change. It marks the things it didn't catch instead of guessing, so you are never sending a number you didn't choose.</p>
     </div>
     <div class="item">
       <div class="ic">Price</div>
       <h3>Five walks free, then decide</h3>
-      <p>Try it on five real jobs before you pay a cent &mdash; no card up front. After that it's $39 a month, or $299.99 a year, and you cancel in your iPhone settings like any other subscription.</p>
+      <p>Try it on five real jobs before you pay a cent, with no card up front. After that it's $39 a month or $299.99 a year, cancelled in your iPhone settings like anything else.</p>
     </div>
   </div>
 </section>
