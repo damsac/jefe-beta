@@ -122,17 +122,20 @@
   .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(24px, 5vw, 48px); align-items: center; }
   @media (max-width: 720px) { .hero-grid { grid-template-columns: 1fr; } }
 
-  /* app screenshots — the real article, not a mockup */
+  /* app screenshot in a device outline — the real article, not a mockup */
   .shot { margin: 0; }
-  .shot img {
-    display: block; width: 100%; max-width: 330px; height: auto; margin: 0 auto;
-    border: 1px solid var(--hairline);
+  .device {
+    width: min(306px, 100%); margin: 0 auto; padding: 10px;
+    background: #15130E; border-radius: 46px;
+    box-shadow: 0 0 0 1.5px #44403A inset, 12px 14px 0 rgba(23,21,15,0.07);
+  }
+  .device img {
+    display: block; width: 100%; height: auto; border-radius: 36px;
   }
   .shot figcaption {
-    margin-top: 10px; text-align: center; font-family: var(--mono);
-    font-size: 11px; letter-spacing: 0.04em; color: var(--ink-45);
+    margin-top: 14px; text-align: center; font-family: var(--mono);
+    font-size: 11px; letter-spacing: 0.04em; color: var(--ink-45); line-height: 1.5;
   }
-  .shot.wide img { max-width: 300px; }
 
   .sub { font-family: var(--mono); font-size: 9px; letter-spacing: 0.06em; color: var(--ink-45); text-transform: uppercase; }
 
@@ -250,8 +253,10 @@
 
     <!-- the real thing: a screenshot of the estimate Jefe writes -->
     <figure class="shot">
-      <img src="/img/estimate.png" width="660" height="1434"
-           alt="An estimate Jefe wrote from a spoken walk-through: Bluestem Landscape, Denver CO, with line items for bark mulch, boxwood trim, an irrigation head and bed edging." />
+      <div class="device">
+        <img src="/img/estimate.png" width="990" height="2151"
+             alt="An estimate Jefe wrote from a spoken walk-through: Bluestem Landscape, Denver CO, with line items for bark mulch, boxwood trim, an irrigation head and bed edging." />
+      </div>
       <figcaption>An estimate Jefe wrote from one walk. Every line is editable.</figcaption>
     </figure>
   </div>
@@ -282,14 +287,6 @@
       <h3>Send it</h3>
       <p>Turn it into an estimate or invoice with your logo on it, then text or email it.</p>
     </div>
-  </div>
-
-  <div class="wrap">
-    <figure class="shot wide">
-      <img src="/img/walking.png" width="660" height="1434" loading="lazy"
-           alt="Jefe mid-walk, showing the items it has picked out of the conversation so far." />
-      <figcaption>Mid-walk. Jefe is picking out the work while you keep moving.</figcaption>
-    </figure>
   </div>
 </section>
 
