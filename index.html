@@ -154,14 +154,22 @@
   /* ---- how it works ---- */
   .beats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 34px; }
   @media (max-width: 720px) { .beats { grid-template-columns: 1fr; } }
-  .beat { background: var(--sheet); border: 1.5px solid var(--hairline); padding: 20px; }
+  .beat {
+    background: var(--sheet); border: 1.5px solid var(--hairline); padding: 20px;
+    display: flex; flex-direction: column;
+  }
+  .beat .top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
   .beat .n { font-family: var(--mono); font-weight: 600; font-size: 12px; color: var(--amber-deep); letter-spacing: 0.1em; }
+  .beat svg { display: block; width: 34px; height: 34px; flex: none; }
+  .beat svg .ln { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  .beat svg .hi { fill: none; stroke: var(--amber-deep); stroke-width: 2.2; stroke-linecap: round; }
   .beat h3 { font-family: var(--ui); font-weight: 700; font-size: 20px; margin: 10px 0 8px; }
   .beat p { font-family: var(--serif); color: var(--ink-70); font-size: 15.5px; margin: 0; }
   .beat .eg {
     font-family: var(--mono); font-size: 12.5px; line-height: 1.6; color: var(--ink-45);
-    margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--hairline);
+    margin-top: auto; padding-top: 12px; border-top: 1px solid var(--hairline);
   }
+  .beat p:not(.eg) { margin-bottom: 14px; }
 
   /* ---- install steps ---- */
   .steps { margin-top: 34px; border-top: 1px solid var(--hairline); }
@@ -189,11 +197,10 @@
 
   /* ---- trust strip ---- */
   .trust { background: var(--ink); color: var(--paper); }
-  .trust .wrap { padding-top: clamp(40px,7vw,64px); padding-bottom: clamp(40px,7vw,64px); }
   .trust .kicker { color: var(--amber); }
   .trust h2 { color: var(--paper); }
   .trust .sub-lead { color: #CFC9B8; }
-  .trust .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 36px; }
+  .trust .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 42px; }
   .trust .item { border-top: 1px solid #3A362E; padding-top: 16px; }
   @media (max-width: 720px) { .trust .grid { grid-template-columns: 1fr; } }
   .trust .item h3 { font-family: var(--ui); font-weight: 700; font-size: 18px; margin: 0 0 8px; }
@@ -279,19 +286,40 @@
   </div>
   <div class="wrap beats">
     <div class="beat">
-      <div class="n">01</div>
+      <div class="top">
+        <span class="n">01</span>
+        <svg viewBox="0 0 34 34" aria-hidden="true" focusable="false">
+            <path class="ln" d="M4 17h2.5"/><path class="ln" d="M9 12.5v9"/>
+            <path class="hi" d="M13.5 7.5v19"/><path class="hi" d="M18 11v12"/>
+            <path class="ln" d="M22.5 8.5v17"/><path class="ln" d="M27 13.5v7"/><path class="ln" d="M30 16h0.5"/>
+          </svg>
+      </div>
       <h3>Walk &amp; talk</h3>
       <p>Tap once and talk. Jefe listens the whole time and writes down what matters &mdash; even with the phone in your pocket.</p>
       <p class="eg">&ldquo;Front beds need mulch, call it three yards&hellip; zone two head is broken, replace it.&rdquo;</p>
     </div>
     <div class="beat">
-      <div class="n">02</div>
+      <div class="top">
+        <span class="n">02</span>
+        <svg viewBox="0 0 34 34" aria-hidden="true" focusable="false">
+            <path class="ln" d="M5 9h17"/><path class="ln" d="M5 15.5h11"/><path class="ln" d="M5 22h20"/>
+            <path class="hi" d="M19.5 15.5h9"/>
+            <path class="ln" d="M24 28.5h6"/>
+          </svg>
+      </div>
       <h3>Fix anything</h3>
       <p>It's a first draft, not a verdict. Tap any line to fix a word, change a quantity, or put your price on it.</p>
       <p class="eg">Jefe flags what it didn't hear, so nothing gets quoted by accident.</p>
     </div>
     <div class="beat">
-      <div class="n">03</div>
+      <div class="top">
+        <span class="n">03</span>
+        <svg viewBox="0 0 34 34" aria-hidden="true" focusable="false">
+            <path class="ln" d="M6 4.5h13l6 6V27a2.5 2.5 0 0 1-2.5 2.5H6A2.5 2.5 0 0 1 3.5 27V7A2.5 2.5 0 0 1 6 4.5Z"/>
+            <path class="ln" d="M19 4.5v6h6"/>
+            <path class="hi" d="M11 20h10"/><path class="hi" d="M17.5 16.5 21 20l-3.5 3.5"/>
+          </svg>
+      </div>
       <h3>Send it</h3>
       <p>Turn it into an estimate, invoice, work order or report with your letterhead on it.</p>
       <p class="eg">Text it, email it, or save the PDF before you leave the driveway.</p>
