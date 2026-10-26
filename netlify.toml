@@ -1,4 +1,41 @@
-# Static single-file site — nothing to build, just publish the repo root.
+# Static site — nothing to build, just publish the repo root.
 [build]
   publish = "."
   command = ""
+
+# ---- One canonical host: https://usejefe.com --------------------------------
+# Domain-level redirects, per https://docs.netlify.com/routing/redirects/redirect-options/
+# ("Domain-level redirects"). Each host only matches if it is assigned to this
+# Netlify site (primary domain, domain alias, or the site's own netlify.app name).
+# :splat keeps the path, so every link already out in the world still lands:
+#   getjefe.netlify.app/privacy.html  (App Store Connect privacy URL, the app)
+#   getjefe.netlify.app/terms(.html)  (listing description, the app)
+#   getjefe.netlify.app/              (support + marketing URL)
+# force = true because the files exist at those paths; without it Netlify would
+# serve them on the old host instead of redirecting (shadowing).
+# Deploy previews (deploy-preview-N--getjefe.netlify.app) are a different host
+# and are left alone, so PRs stay reviewable.
+
+[[redirects]]
+  from = "https://getjefe.netlify.app/*"
+  to = "https://usejefe.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://getjefe.netlify.app/*"
+  to = "https://usejefe.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.usejefe.com/*"
+  to = "https://usejefe.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.usejefe.com/*"
+  to = "https://usejefe.com/:splat"
+  status = 301
+  force = true
