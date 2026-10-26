@@ -1,64 +1,64 @@
-# Jefe — beta landing page
+# Jefe — marketing site
 
-A single-file static site that explains Jefe to non-technical field crews and
-walks them through installing the TestFlight beta, plus a waitlist signup.
-Built in the Jefe "Field Instrument" look (paper/ink/amber, same fonts as the
-app) so it feels like part of the product.
+The public website for [Jefe](https://apps.apple.com/app/id6761315709), the iOS
+app that turns a spoken site walk into notes, estimates and work orders.
+It's three static pages and nothing else:
 
-Live target: GitHub Pages under `sacmeng` → `https://sacmeng.github.io/<repo>`.
+| File | What it is | Who links to it |
+|------|------------|-----------------|
+| `index.html` | The landing page. Sends people to the App Store. | App Store support + marketing URL |
+| `privacy.html` | Privacy Policy | App Store privacy URL, the app's legal screen |
+| `terms.html` | Terms of Service | App Store description, the app's legal screen |
 
----
+`img/` holds the screenshot the landing page uses. `robots.txt` and
+`sitemap.xml` point search engines at the canonical host. No build step, no
+dependencies, no JavaScript beyond one line that redirects the GitHub Pages copy
+(see below). Built in the app's "Field Instrument" look (paper, ink, amber, the
+same fonts as the app) so it reads as part of the product.
 
-## ⚙️ Two things to plug in before it goes live
+## Where it lives
 
-Both are clearly marked in `index.html` (search for the ⬇⬇ comments):
+- **https://usejefe.com** is the canonical address. Every page carries
+  `<link rel="canonical">` to it.
+- Hosted on **Netlify**, site `getjefe`. `netlify.toml` 301-redirects
+  `getjefe.netlify.app` and `www.usejefe.com` to `https://usejefe.com`, keeping
+  the path, so the old links already in App Store Connect and in shipped builds
+  (`getjefe.netlify.app/privacy.html`, `/terms.html`, `/terms`, `/`) keep landing.
+- The domain is registered at Cloudflare, and its DNS points at Netlify.
+- GitHub Pages is also switched on for this repo and serves a copy at
+  `damsac.github.io/jefe-beta`. That copy is a leftover, not a second site. Its
+  pages redirect to usejefe.com and declare usejefe.com as canonical. The clean
+  fix is to switch Pages off under Settings → Pages.
 
-1. **Your public TestFlight join link** — Step 2 button.
-   Replace `https://testflight.apple.com/join/XXXXXXXX` with the real link.
-   - Get it in **App Store Connect → your app → TestFlight → External Testing →
-     (create/select a group) → Public Link → Enable**. Copy that URL.
-   - Note: a *public* link requires an **External** testing group, which needs a
-     one-time **Beta App Review** (usually a day or so). Internal-only builds
-     don't get a public link — those are invite-by-email. This page assumes the
-     public link path (the "share with anyone" flow you wanted).
+## Deploys
 
-2. **Your Formspree endpoint** — the waitlist form `action`.
-   Replace `https://formspree.io/f/YOUR_FORM_ID` with your form's URL.
-   - Create a free form at **formspree.io**, point it at your email, copy the
-     `https://formspree.io/f/xxxxxxx` endpoint it gives you.
-   - Until it's set, the form shows a friendly "not hooked up yet" message
-     instead of silently failing.
+**Pushing to `main` publishes the live site.** Netlify watches `main` and
+deploys it as-is. There is no staging step in between.
 
-Optional: the contact email in the footer + `mailto:` is `isaacwm23@gmail.com` —
-swap it if you want a different inbox on the public page.
+So nothing goes to `main` directly:
 
----
+1. Work on a branch and open a pull request.
+2. Netlify builds a deploy preview for the PR
+   (`deploy-preview-<N>--getjefe.netlify.app`). Look at it on a phone.
+3. Someone other than the author reviews it, and then it gets merged.
 
-## 🚀 Deploy to GitHub Pages
+The privacy policy and the terms are legal text that the app and the App Store
+listing point to. Change them on purpose, update the "Last updated" line when
+you do, and say in the PR what changed and why.
+
+## Preview locally
 
 ```bash
-# 1. Create a public repo under sacmeng (via the gh CLI or github.com), e.g. "jefe-beta"
-gh repo create sacmeng/jefe-beta --public --source=. --remote=origin --push
-
-# 2. Enable Pages: repo Settings → Pages → Source: "Deploy from a branch" → main / (root)
-#    (or: gh api ... — the web UI is easiest)
+python3 -m http.server 8000
+# open http://localhost:8000
 ```
 
-Your link will be `https://sacmeng.github.io/jefe-beta/`. Share that.
+Opening `index.html` straight from disk mostly works, but the screenshot and
+the footer links use root paths (`/img/…`, `/terms`), and those need a server.
+`/terms` and `/privacy` without `.html` only resolve on Netlify, which serves
+`terms.html` for `/terms` on its own.
 
-Want a cleaner URL later (e.g. `getjefe.app`)? Buy the domain, add a `CNAME`
-file with the domain, and point the DNS at GitHub Pages — the site is already
-domain-ready.
+## Contact
 
----
-
-## 🔎 Preview locally
-
-Just open `index.html` in a browser. No build step, no dependencies.
-
-## Heads-up: the app may show as "Sitewalk"
-
-The TestFlight build's display name is still **Sitewalk** (an earlier name).
-Step 3 tells testers this so they aren't confused. Cleanest fix is to rename the
-app's `CFBundleDisplayName` to Jefe in the iOS project + the App Store Connect
-listing; until then the note handles it.
+The address on the site is `damsac.app@gmail.com`. It's on every page and in
+the legal text, so change it everywhere at once.
