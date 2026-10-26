@@ -38,8 +38,10 @@ deploys it as-is. There is no staging step in between.
 So nothing goes to `main` directly:
 
 1. Work on a branch and open a pull request.
-2. Netlify builds a deploy preview for the PR
-   (`deploy-preview-<N>--getjefe.netlify.app`). Look at it on a phone.
+2. Look at it on a phone. Serve it locally (below) and open it from the phone
+   on the same network. Netlify deploy previews were not running for this repo
+   as of 2026-10-26. If they get switched on, the preview for PR N lands at
+   `deploy-preview-N--getjefe.netlify.app`.
 3. Someone other than the author reviews it, and then it gets merged.
 
 The privacy policy and the terms are legal text that the app and the App Store

@@ -13,7 +13,7 @@
 #   getjefe.netlify.app/              (support + marketing URL)
 # force = true because the files exist at those paths; without it Netlify would
 # serve them on the old host instead of redirecting (shadowing).
-# Deploy previews (deploy-preview-N--getjefe.netlify.app) are a different host
+# Deploy previews, if switched on (deploy-preview-N--getjefe.netlify.app), are a different host
 # and are left alone, so PRs stay reviewable.
 
 [[redirects]]
