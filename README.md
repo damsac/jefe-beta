@@ -33,11 +33,13 @@ Only `public/` is ever served. This README, `docs/`, `.github/`,
 - `/privacy` and `/terms` serve the pages. `/privacy.html` and `/terms.html`
   307 to them, which is Cloudflare's default HTML handling, so links in both
   shapes land.
-- **Netlify** (`getjefe.netlify.app`) used to host the site. It now only
-  forwards: `netlify.toml` 301s every path to the same path on usejefe.com.
-  It has to stay up, because App Store Connect and every shipped build still
-  link to `getjefe.netlify.app/privacy.html`, `/terms.html`, `/terms` and `/`.
-  Netlify still deploys `main` to do this, so leave the Netlify site connected.
+- **Netlify** (`getjefe.netlify.app`) used to host the site, and for now still
+  serves the same pages from `public/`. App Store Connect and every shipped build
+  link to `getjefe.netlify.app/privacy.html`, `/terms.html`, `/terms` and `/`,
+  so that address has to keep answering. Once usejefe.com is verified serving,
+  a follow-up change turns `netlify.toml` into a 301 forwarder to the same path
+  on usejefe.com. **That forwarder must not go live before usejefe.com serves.**
+  Leave the Netlify site connected either way.
 - **GitHub Pages** is still switched on for this repo. Since the pages moved
   into `public/`, it no longer serves them at their old paths. Switch it off
   under Settings → Pages.
@@ -98,25 +100,33 @@ dynamically to `concat("https://usejefe.com", http.request.uri.path)`, status
 
 ## Cutover from Netlify (one time)
 
-1. In Cloudflare DNS for `usejefe.com`, delete the two apex `A` records
+Two merges, in this order. The first puts the site on Cloudflare while Netlify
+keeps serving the old address as it is. The second turns Netlify into a
+forwarder, and it waits until usejefe.com is proven to serve.
+
+1. **Secrets.** Add `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` (above).
+2. **DNS.** In Cloudflare DNS for `usejefe.com`, delete the two apex `A` records
    (`52.52.192.191`, `13.52.188.95`) and the `www` `CNAME` → `getjefe.netlify.app`.
    A Custom Domain can't be created over an existing record. Leave the MX and
-   email TXT records alone.
-2. Add the two repository secrets above.
-3. Deploy the Worker **before** merging: from this branch, run
-   `npx wrangler login`, then `npx wrangler deploy`. Wrangler creates the Custom
-   Domains, their DNS records and their certificates. Check that
-   `https://usejefe.com/privacy` loads.
-   The order matters. Merging also makes Netlify start forwarding to
-   usejefe.com, and if the Worker isn't serving yet, every old link forwards to
-   nothing.
-4. Merge. The Deploy workflow redeploys the same thing, which also proves the
-   secrets work, and Netlify becomes the forwarder.
-5. Verify:
+   email TXT records alone. From here until step 3 finishes, usejefe.com doesn't
+   resolve. Nothing links to it yet, so nothing breaks.
+3. **Merge the Cloudflare change.** The Deploy workflow runs `wrangler deploy`,
+   which creates the `jefe-site` Worker, attaches both Custom Domains, and
+   creates their DNS records and certificates. Netlify redeploys from `public/`
+   and keeps serving getjefe.netlify.app unchanged.
+4. **Verify usejefe.com:**
    - `https://usejefe.com/`, `/privacy` and `/terms` return 200.
-   - `https://getjefe.netlify.app/privacy.html` 301s to usejefe.com, and so do
-     `/terms`, `/terms.html` and `/`.
+   - `/privacy.html` and `/terms.html` 307 to `/privacy` and `/terms`.
+   - `www.usejefe.com` answers.
    - Email to a usejefe.com address still forwards.
+5. **Only then, merge the Netlify forwarder.** Afterwards,
+   `curl -sI https://getjefe.netlify.app/privacy.html` should show a 301 to
+   `https://usejefe.com/privacy.html`. Check `/terms`, `/terms.html` and `/` the
+   same way.
+
+If the deploy in step 3 fails (a bad token, a leftover DNS record), nothing
+user-facing breaks. getjefe.netlify.app is still serving the pages. Fix it and
+re-run the workflow from the Actions tab.
 
 ## Contact
 
