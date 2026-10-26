@@ -1,0 +1,28 @@
+{
+	// The marketing site for Jefe: static files only, no Worker script.
+	"name": "jefe-site",
+	"compatibility_date": "2026-10-20",
+
+	// Everything served lives in public/. README, docs/, .github/, netlify.toml
+	// and this file sit outside it, so they are never uploaded.
+	"assets": {
+		"directory": "./public",
+		// Default, stated so nobody has to look it up: /privacy serves
+		// privacy.html, and /privacy.html 307s to /privacy.
+		"html_handling": "auto-trailing-slash",
+		"not_found_handling": "none"
+	},
+
+	// The Worker is the origin for both hostnames. Cloudflare creates the DNS
+	// records and certificates on deploy, and refuses if a record for the
+	// hostname already exists (see README, "Cutover").
+	"routes": [
+		{ "pattern": "usejefe.com", "custom_domain": true },
+		{ "pattern": "www.usejefe.com", "custom_domain": true }
+	],
+
+	// No *.workers.dev copy of the site, and no preview URLs, so the only
+	// public address is usejefe.com.
+	"workers_dev": false,
+	"preview_urls": false
+}

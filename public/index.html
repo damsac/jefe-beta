@@ -10,6 +10,13 @@
 <meta property="og:title" content="Jefe: say it out loud, get the paperwork" />
 <meta property="og:description" content="Walk the job, talk it through, and Jefe writes up the estimate. On the App Store — first five walks free." />
 <meta property="og:type" content="website" />
+<meta property="og:url" content="https://usejefe.com/" />
+<meta property="og:image" content="https://usejefe.com/img/estimate.png" />
+<meta property="og:image:alt" content="An estimate Jefe wrote from a spoken walk-through, on an iPhone screen." />
+<link rel="canonical" href="https://usejefe.com/" />
+<!-- The repo also publishes to GitHub Pages (damsac.github.io/jefe-beta). That copy
+     is a duplicate, not a second site: send anyone who lands there to the real one. -->
+<script>if (/\.github\.io$/.test(location.hostname)) location.replace('https://usejefe.com' + location.pathname.replace(/^\/jefe-beta(\/public)?/, ''));</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -210,25 +217,15 @@
     font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
   }
 
-  /* ---- waitlist ---- */
-  .waitlist .card {
+  /* ---- get it (closing call) ---- */
+  .get .card {
     margin-top: 30px; background: var(--sheet); border: 2px solid var(--ink);
     box-shadow: 8px 8px 0 rgba(23,21,15,0.10); padding: clamp(22px, 4vw, 34px);
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px 28px;
   }
-  .field { display: block; margin-top: 16px; }
-  .field label { display: block; font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-45); margin-bottom: 7px; }
-  .field input, .field select {
-    width: 100%; font-family: var(--ui); font-size: 16px; color: var(--ink);
-    padding: 13px 14px; background: var(--paper); border: 1.5px solid var(--hairline);
-    border-radius: 0; -webkit-appearance: none; appearance: none;
-  }
-  .field input:focus, .field select:focus { outline: none; border-color: var(--amber-deep); box-shadow: inset 0 0 0 1px var(--amber-deep); }
-  .field select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239A6A00' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; }
-  form .btn { width: 100%; margin-top: 22px; }
-  .honeypot { position: absolute; left: -9999px; }
-  .form-msg { margin-top: 14px; font-family: var(--cond); font-weight: 600; font-size: 15px; display: none; }
-  .form-msg.ok { display: block; color: var(--green); }
-  .form-msg.err { display: block; color: var(--red); }
+  .get .card > * { min-width: 0; }
+  .get .card .what { font-family: var(--cond); font-weight: 600; font-size: 17px; color: var(--ink); }
+  .get .card .what .fine { display: block; margin-top: 6px; font-family: var(--mono); font-weight: 400; font-size: 12px; letter-spacing: 0.04em; color: var(--ink-45); }
 
   /* ---- footer ---- */
   footer { border-top: 2px solid var(--ink); padding: 34px 0 46px; }
@@ -368,7 +365,7 @@
   <div class="wrap">
     <div class="notebar">
       <div class="tick"></div>
-      <div class="txt">iPhone only for now. On Android? Leave your email below and we'll tell you the day it's ready.</div>
+      <div class="txt">iPhone only for now. There's no Android version yet.</div>
     </div>
   </div>
 </section>
@@ -399,45 +396,18 @@
   </div>
 </section>
 
-<!-- ============ WAITLIST ============ -->
-<section id="waitlist" class="waitlist">
+<!-- ============ GET IT ============ -->
+<section id="get" class="get">
   <div class="wrap sec-head">
-    <span class="kicker">Not on iPhone?</span>
-    <h2>Tell us where to find you.</h2>
-    <p class="sub-lead">Android isn't ready yet. Leave your email and we'll let you know the day it is &mdash; nothing else, no newsletter.</p>
+    <span class="kicker">Get Jefe</span>
+    <h2>Walk your next job with it.</h2>
+    <p class="sub-lead">Free to download. Your first five walks are free &mdash; no card, nothing to cancel.</p>
   </div>
 
   <div class="wrap">
     <div class="card">
-      <!-- Netlify Forms: no third-party service. Netlify captures submissions on
-           deploy (data-netlify) and emails damsac.app@gmail.com per submission
-           once the email notification is enabled in the Netlify dashboard. -->
-      <form id="waitlist-form" name="waitlist" method="POST"
-            data-netlify="true" netlify-honeypot="company-website">
-        <input type="hidden" name="form-name" value="waitlist" />
-        <div class="field">
-          <label for="name">Name</label>
-          <input id="name" type="text" name="name" required autocomplete="name" placeholder="Your name" />
-        </div>
-        <div class="field">
-          <label for="email">Email</label>
-          <input id="email" type="email" name="email" required autocomplete="email" placeholder="you@email.com" />
-        </div>
-        <div class="field">
-          <label for="trade">What do you do? (optional)</label>
-          <select id="trade" name="trade">
-            <option value="">Choose one…</option>
-            <option>Landscaping / lawn care</option>
-            <option>Property management</option>
-            <option>Home / property inspection</option>
-            <option>Other field / trade work</option>
-          </select>
-        </div>
-        <!-- spam trap (Netlify silently drops submissions that fill this) -->
-        <p class="honeypot"><label>Leave this empty: <input name="company-website" tabindex="-1" autocomplete="off" /></label></p>
-        <button class="btn" type="submit">Tell me when it's ready</button>
-        <p class="form-msg" id="form-msg" role="status" aria-live="polite"></p>
-      </form>
+      <p class="what">Jefe for iPhone<span class="fine">No account, no sign-up. Open it and walk a job.</span></p>
+      <a class="badge" href="https://apps.apple.com/app/id6761315709" target="_blank" rel="noopener"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us" alt="Download Jefe on the App Store" width="150" height="50" /></a>
     </div>
   </div>
 </section>
@@ -455,34 +425,5 @@
   </div>
 </footer>
 
-<script>
-  // Waitlist — submit to Netlify Forms via fetch (URL-encoded POST to the page)
-  // so we capture the submission without leaving the page.
-  const form = document.getElementById('waitlist-form');
-  const msg = document.getElementById('form-msg');
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    msg.className = 'form-msg'; msg.textContent = '';
-    const body = new URLSearchParams(new FormData(form)).toString();
-    try {
-      const res = await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body
-      });
-      if (res.ok) {
-        form.reset();
-        msg.className = 'form-msg ok';
-        msg.textContent = "You're on the list. We'll tell you when Android lands.";
-      } else {
-        msg.className = 'form-msg err';
-        msg.textContent = 'Something went wrong. Try again, or email us directly.';
-      }
-    } catch (_) {
-      msg.className = 'form-msg err';
-      msg.textContent = 'Network hiccup. Try again in a moment.';
-    }
-  });
-</script>
 </body>
 </html>
