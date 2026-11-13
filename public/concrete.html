@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Concrete calculator: cubic yards and bags | Jefe</title>
+<meta name="description" content="Cubic yards and bag count for a rectangular slab. 40, 60, or 80 lb bags, waste starting at 10%. Leave the price blank and no dollar amount is shown." />
+<link rel="canonical" href="https://usejefe.com/concrete" />
+<meta property="og:title" content="Concrete calculator: cubic yards and bags | Jefe" />
+<meta property="og:description" content="Cubic yards and bag count for a rectangular slab. 40, 60, or 80 lb bags, waste starting at 10%. Leave the price blank and no dollar amount is shown." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://usejefe.com/concrete" />
+<meta property="og:image" content="https://usejefe.com/img/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Jefe. Say it out loud. Get the paperwork." />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Concrete calculator: cubic yards and bags | Jefe" />
+<meta name="twitter:description" content="Cubic yards and bag count for a rectangular slab. 40, 60, or 80 lb bags, waste starting at 10%. Leave the price blank and no dollar amount is shown." />
+<meta name="twitter:image" content="https://usejefe.com/img/og.png" />
+<meta name="theme-color" content="#FFB800" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/style.css" />
+<script>if (/\.github\.io$/.test(location.hostname)) location.replace('https://usejefe.com' + location.pathname.replace(/^\/jefe-beta(\/public)?/, ''));</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Concrete calculator","description":"Cubic yards and bag count for a rectangular slab. 40, 60, or 80 lb bags, waste starting at 10%. Leave the price blank and no dollar amount is shown.","url":"https://usejefe.com/concrete","applicationCategory":"BusinessApplication","operatingSystem":"Web","browserRequirements":"Requires JavaScript","isPartOf":{"@type":"WebSite","name":"Jefe","url":"https://usejefe.com/"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why does 10 by 10 by 4 inches come out to 62 bags?","acceptedAnswer":{"@type":"Answer","text":"The slab is 33.33 cubic feet. With 10% waste that is about 36.67 cubic feet. Divided by 0.60 cubic feet per 80 lb bag, that is 61.1 bags, which rounds up to 62."}},{"@type":"Question","name":"What if I leave the price blank?","acceptedAnswer":{"@type":"Answer","text":"You still get yards and bags. No dollar amount is shown. Entering 0 does the same thing."}},{"@type":"Question","name":"Can I turn waste off?","acceptedAnswer":{"@type":"Answer","text":"Yes. Waste can be anywhere from 0 to 100 percent. Outside that range the calculator stops instead of guessing."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://usejefe.com/"},{"@type":"ListItem","position":2,"name":"Calculators","item":"https://usejefe.com/calculators/"},{"@type":"ListItem","position":3,"name":"Concrete","item":"https://usejefe.com/concrete"}]}]}</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="bar">
+  <div class="wrap">
+    <a class="logo" href="/"><img src="/img/icon-512.png" width="32" height="32" alt="" />Jefe</a>
+    <nav class="nav" aria-label="Primary">
+      <a class="nav-link" href="/calculators/" aria-current="page">Calculators</a>
+      <a class="nav-link" href="/support">Support</a>
+      <a class="btn btn-amber btn-small" href="https://apps.apple.com/us/app/jefe-voice-estimate-maker/id6761315709" target="_blank" rel="noopener">Get the app</a>
+    </nav>
+  </div>
+</header>
+<main id="content" class="block">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/calculators/">Calculators</a> / <span>Concrete</span></nav>
+    <h1>Concrete calculator</h1>
+    <p class="page-intro">Cubic yards and a bag count for a rectangular slab or pad. Thickness starts at 4 inches and waste at 10%, both editable. Bag yield is the figure printed on most US bags — check yours. Leave price empty and the result is quantities only.</p>
+    <div class="calc-layout">
+      <div class="calc-card">
+        <h2>Calculator</h2>
+        <form data-calc="concrete" action="#" onsubmit="return false">
+  <div class="fields">
+    <label class="field"><span>Length</span><input name="length" inputmode="decimal" autocomplete="off" aria-label="Length" /><select name="lengthUnit" aria-label="Unit"><option value="feet" selected>FT</option><option value="inches">IN</option><option value="yards">YD</option><option value="meters">M</option></select></label>
+    <label class="field"><span>Width</span><input name="width" inputmode="decimal" autocomplete="off" aria-label="Width" /><select name="widthUnit" aria-label="Unit"><option value="feet" selected>FT</option><option value="inches">IN</option><option value="yards">YD</option><option value="meters">M</option></select></label>
+    <label class="field"><span>Thickness</span><input name="thickness" inputmode="decimal" autocomplete="off" value="4" aria-label="Thickness" /><select name="thicknessUnit" aria-label="Unit"><option value="feet">FT</option><option value="inches" selected>IN</option><option value="yards">YD</option><option value="meters">M</option></select></label>
+    <label class="field"><span>Waste</span><input name="waste" inputmode="decimal" autocomplete="off" value="10" aria-label="Waste" /><span class="suffix">%</span></label>
+    <label class="field"><span>Price</span><input name="price" inputmode="decimal" autocomplete="off" placeholder="Optional" aria-label="Price per cubic yard" /><span class="suffix">$/CU YD</span></label>
+  </div>
+  <p class="choice-label">Bag size</p>
+  <div class="choices" role="radiogroup" aria-label="Bag size">
+  <label><input type="radio" name="bag" value="40" />40 LB</label>
+  <label><input type="radio" name="bag" value="60" />60 LB</label>
+  <label><input type="radio" name="bag" value="80" checked />80 LB</label>
+</div>
+  <div class="result is-empty" data-result aria-live="polite"><p>Fill in the measurements to see a result.</p></div>
+</form>
+        <p class="disclaimer">Estimate only. Confirm quantities with your supplier and plans.</p>
+      </div>
+      <div class="prose">
+        <h2>Worked example</h2>
+        <div class="example"><p>A slab <strong>10 ft × 10 ft × 4 in</strong>, 10% waste, 80 lb bags.</p>
+    <p>Raw volume is 33.33 cubic feet (1.23 cubic yards). With waste the order is <strong>1.36 cubic yards</strong>.</p>
+    <p>An 80 lb bag is about 0.60 cubic feet, so that mix is <strong>62 bags</strong>. The count rounds up from 61.1. No price was entered, so there is no dollar amount.</p></div>
+        <h2>Formulas</h2>
+        <ul>
+    <li>Cubic feet = length × width × thickness, after each side is converted to feet.</li>
+    <li>With waste = cubic feet × (1 + waste ÷ 100).</li>
+    <li>Cubic yards = cubic feet with waste ÷ 27.</li>
+    <li>Bags = cubic feet with waste ÷ the bag yield, rounded up.</li>
+    <li>Yields: 0.30 cu ft (40 lb), 0.45 (60 lb), 0.60 (80 lb).</li>
+    <li>If you type a price per cubic yard, cost uses the yards rounded to the hundredth. A blank or zero price shows no dollar amount.</li>
+  </ul>
+        <h2>Assumptions</h2>
+        <table class="assumptions"><thead><tr><th>Assumption</th><th>Value</th></tr></thead><tbody><tr><td>Inch to feet</td><td>1/12</td></tr><tr><td>Yard to feet</td><td>3</td></tr><tr><td>Meter to feet</td><td>1/0.3048 (the international foot)</td></tr><tr><td>Cubic feet per cubic yard</td><td>27</td></tr><tr><td>40 lb bag</td><td>0.30 cubic feet</td></tr><tr><td>60 lb bag</td><td>0.45 cubic feet</td></tr><tr><td>80 lb bag</td><td>0.60 cubic feet</td></tr><tr><td>Default bag</td><td>80 lb</td></tr><tr><td>Default thickness</td><td>4 in</td></tr><tr><td>Default waste</td><td>10%</td></tr><tr><td>Blank price</td><td>No dollar amount. Not $0.</td></tr></tbody></table>
+        <h2>Questions</h2>
+        <div class="faq"><details><summary>Why does 10 by 10 by 4 inches come out to 62 bags?</summary><p>The slab is 33.33 cubic feet. With 10% waste that is about 36.67 cubic feet. Divided by 0.60 cubic feet per 80 lb bag, that is 61.1 bags, which rounds up to 62.</p></details><details><summary>What if I leave the price blank?</summary><p>You still get yards and bags. No dollar amount is shown. Entering 0 does the same thing.</p></details><details><summary>Can I turn waste off?</summary><p>Yes. Waste can be anywhere from 0 to 100 percent. Outside that range the calculator stops instead of guessing.</p></details></div>
+        <aside class="cta-card">
+    <h2>Put the number on a job</h2>
+    <p>A calculator gives you a quantity. Jefe turns a walk into the estimate, with your words and your price.</p>
+    <a class="btn btn-amber" href="https://apps.apple.com/us/app/jefe-voice-estimate-maker/id6761315709" target="_blank" rel="noopener">Make this an estimate in Jefe</a>
+  </aside>
+        <h2>Other calculators</h2><div class="related"><a href="/calculators/area-volume">Area &amp; volume</a><a href="/mulch">Mulch</a><a href="/gravel">Gravel</a><a href="/calculators/">All calculators</a></div>
+      </div>
+    </div>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <a class="logo" href="/"><img src="/img/icon-512.png" width="32" height="32" alt="" />Jefe</a>
+    <p class="fine">Voice to paperwork for the field. Your audio never leaves your phone.<br />
+      Jefe is built by Isaac Wallace-Menge, a one-person shop in California. If you email, you get me.<br />
+      <a href="/">Home</a> · <a href="/calculators/">Calculators</a> · <a href="/support">Support</a> ·
+      <a href="/terms">Terms</a> · <a href="/privacy">Privacy</a> ·
+      <a href="mailto:damsac.app@gmail.com">damsac.app@gmail.com</a>
+    </p>
+  </div>
+</footer>
+<script src="/calc.js"></script>
+<script src="/concrete-ui.js"></script>
+</body>
+</html>

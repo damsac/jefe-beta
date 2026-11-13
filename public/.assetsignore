@@ -1,3 +1,4 @@
 # Never upload these as public assets.
 **/.DS_Store
 .assetsignore
+calc.test.js

@@ -4,424 +4,172 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Jefe: say it out loud, get the paperwork</title>
-<meta name="description" content="Jefe turns a spoken walk-through into a ready-to-send estimate draft before you're back in the truck. On the App Store for landscapers, property managers &amp; home inspectors. First five walks free." />
-
-<!-- Open Graph / iMessage / social preview -->
+<meta name="description" content="Jefe turns a spoken walk-through into a ready-to-send estimate draft before you're back in the truck. On the App Store for landscapers, property managers and home inspectors. First five walks free." />
+<link rel="canonical" href="https://usejefe.com/" />
 <meta property="og:title" content="Jefe: say it out loud, get the paperwork" />
-<meta property="og:description" content="Walk the job, talk it through, and Jefe writes up the estimate. On the App Store — first five walks free." />
+<meta property="og:description" content="Jefe turns a spoken walk-through into a ready-to-send estimate draft before you're back in the truck. On the App Store for landscapers, property managers and home inspectors. First five walks free." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://usejefe.com/" />
-<meta property="og:image" content="https://usejefe.com/img/estimate.png" />
-<meta property="og:image:alt" content="An estimate Jefe wrote from a spoken walk-through, on an iPhone screen." />
-<link rel="canonical" href="https://usejefe.com/" />
-<!-- The repo also publishes to GitHub Pages (damsac.github.io/jefe-beta). That copy
-     is a duplicate, not a second site: send anyone who lands there to the real one. -->
-<script>if (/\.github\.io$/.test(location.hostname)) location.replace('https://usejefe.com' + location.pathname.replace(/^\/jefe-beta(\/public)?/, ''));</script>
-
+<meta property="og:image" content="https://usejefe.com/img/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Jefe. Say it out loud. Get the paperwork." />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Jefe: say it out loud, get the paperwork" />
+<meta name="twitter:description" content="Jefe turns a spoken walk-through into a ready-to-send estimate draft before you're back in the truck. On the App Store for landscapers, property managers and home inspectors. First five walks free." />
+<meta name="twitter:image" content="https://usejefe.com/img/og.png" />
+<meta name="theme-color" content="#FFB800" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Barlow+Semi+Condensed:wght@500;600&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet" />
-
-<style>
-  :root {
-    /* Field Instrument palette — matches the Jefe app */
-    --paper:      #F6F4EC;
-    --paper-deep: #EFEBDD;
-    --sheet:      #FBFAF4;
-    --ink:        #17150F;
-    --ink-70:     #46433A;
-    --ink-45:     #726E62;
-    --ink-25:     #A9A497;
-    --amber:      #FFBB26;
-    --amber-deep: #9A6A00;
-    --amber-tint: #FAF1D9;
-    --on-amber:   #141412;
-    --hairline:   #DAD5C6;
-    --red:        #B23B2E;
-    --green:      #3E6B35;
-
-    --ui:   'Barlow', system-ui, sans-serif;
-    --cond: 'Barlow Semi Condensed', 'Barlow', sans-serif;
-    --mono: 'IBM Plex Mono', ui-monospace, monospace;
-    --serif:'Source Serif 4', Georgia, serif;
-
-    --pad: clamp(26px, 6vw, 44px);
-    --maxw: 880px;
-  }
-
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  /* grid/flex children default to min-width:auto, which lets long lines push a
-     cell wider than the viewport → horizontal overflow. Reset it everywhere. */
-  .hero-grid > *, .beats > *, .beat, .step > *, .trust .grid > *,
-  footer .wrap > * { min-width: 0; }
-  .hero .fine, .step p, .beat p { overflow-wrap: anywhere; }
-  body {
-    margin: 0;
-    background: var(--paper);
-    color: var(--ink);
-    font-family: var(--ui);
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
-    /* faint carbon-form ruling */
-    background-image: repeating-linear-gradient(
-      to bottom, transparent, transparent 39px, rgba(0,0,0,0.018) 39px, rgba(0,0,0,0.018) 40px);
-  }
-  a { color: inherit; }
-  img { max-width: 100%; }
-
-  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--pad); }
-
-  /* ---- reusable bits ---- */
-  .kicker {
-    font-family: var(--mono); font-weight: 600; font-size: 12px;
-    letter-spacing: 0.18em; text-transform: uppercase; color: var(--amber-deep);
-  }
-  .stamp {
-    display: inline-block; font-family: var(--mono); font-weight: 600;
-    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
-    padding: 3px 7px 2px; background: var(--amber-tint);
-    color: var(--amber-deep); border: 1px solid var(--amber);
-  }
-  .btn {
-    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-    font-family: var(--ui); font-weight: 700; font-size: 15px; letter-spacing: 0.04em;
-    text-transform: uppercase; text-decoration: none; cursor: pointer;
-    padding: 15px 26px; border: 2px solid var(--ink); background: var(--amber);
-    color: var(--on-amber); transition: transform .12s ease, box-shadow .12s ease;
-    box-shadow: 4px 4px 0 var(--ink);
-  }
-  .btn:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--ink); }
-  .btn:active { transform: translate(2px,2px); box-shadow: 1px 1px 0 var(--ink); }
-  .btn.ghost { background: transparent; color: var(--ink); box-shadow: none; }
-  .btn.ghost:hover { background: var(--paper-deep); transform: none; }
-
-  .logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
-  .logo .mark { width: 22px; height: 22px; background: var(--amber-deep); flex: none; }
-  .logo .word { font-family: var(--ui); font-weight: 800; font-size: 22px; letter-spacing: 0.02em; }
-
-  /* ---- top bar ---- */
-  header.bar {
-    position: sticky; top: 0; z-index: 20;
-    background: rgba(246,244,236,0.92); backdrop-filter: blur(6px);
-    border-bottom: 1px solid var(--hairline);
-  }
-  header.bar .wrap { display: flex; align-items: center; justify-content: space-between; height: 62px; }
-  header.bar .meta { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; color: var(--ink-45); text-transform: uppercase; }
-
-  /* ---- hero ---- */
-  /* top/bottom only — leave .wrap's horizontal padding intact (a `padding`
-     shorthand here would zero the side margins and flush content left). */
-  .hero { padding-top: clamp(38px, 8vw, 80px); padding-bottom: clamp(30px, 6vw, 60px); }
-  .hero h1 {
-    font-family: var(--ui); font-weight: 800; letter-spacing: -0.01em;
-    font-size: clamp(38px, 9vw, 68px); line-height: 1.02; margin: 14px 0 0;
-  }
-  .hero .lead {
-    font-family: var(--serif); font-size: clamp(17px, 2.4vw, 21px); color: var(--ink-70);
-    max-width: 30ch; margin: 20px 0 0; line-height: 1.5;
-  }
-  .hero .ctas { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 30px; }
-  .hero .fine {
-    margin-top: 20px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em;
-    color: var(--ink-45);
-  }
-  .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(24px, 5vw, 48px); align-items: center; }
-  @media (max-width: 720px) { .hero-grid { grid-template-columns: 1fr; } }
-
-  /* app screenshot in a device outline — the real article, not a mockup */
-  .shot { margin: 0; }
-  .device {
-    width: min(306px, 100%); margin: 0 auto; padding: 10px;
-    background: #15130E; border-radius: 46px;
-    box-shadow: 0 0 0 1.5px #44403A inset, 12px 14px 0 rgba(23,21,15,0.07);
-  }
-  .device img {
-    display: block; width: 100%; height: auto; border-radius: 36px;
-  }
-  .shot figcaption {
-    margin-top: 14px; text-align: center; font-family: var(--mono);
-    font-size: 11px; letter-spacing: 0.04em; color: var(--ink-45); line-height: 1.5;
-  }
-
-  .sub { font-family: var(--mono); font-size: 9px; letter-spacing: 0.06em; color: var(--ink-45); text-transform: uppercase; }
-
-  .badge { border: 0; display: inline-flex; }
-  .badge img { display: block; height: 50px; width: auto; }
-
-  /* ---- section frame ---- */
-  section { padding: clamp(40px, 8vw, 74px) 0; }
-  .divider { border: none; border-top: 2px dashed var(--hairline); margin: 0; }
-  .sec-head h2 {
-    font-family: var(--ui); font-weight: 800; font-size: clamp(26px, 5vw, 38px);
-    letter-spacing: -0.01em; margin: 8px 0 0; line-height: 1.08;
-  }
-  .sec-head .sub-lead { font-family: var(--serif); color: var(--ink-70); font-size: 17px; margin: 12px 0 0; max-width: 52ch; }
-
-  /* ---- how it works ---- */
-  .beats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 34px; }
-  @media (max-width: 720px) { .beats { grid-template-columns: 1fr; } }
-  .beat {
-    background: var(--sheet); border: 1.5px solid var(--hairline); padding: 20px;
-    display: flex; flex-direction: column;
-  }
-  .beat .top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-  .beat .n { font-family: var(--mono); font-weight: 600; font-size: 12px; color: var(--amber-deep); letter-spacing: 0.1em; }
-  .beat svg { display: block; width: 34px; height: 34px; flex: none; }
-  .beat svg .ln { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-  .beat svg .hi { fill: none; stroke: var(--amber-deep); stroke-width: 2.2; stroke-linecap: round; }
-  .beat h3 { font-family: var(--ui); font-weight: 700; font-size: 20px; margin: 10px 0 8px; }
-  .beat p { font-family: var(--serif); color: var(--ink-70); font-size: 15.5px; margin: 0; }
-  .beat .eg {
-    font-family: var(--mono); font-size: 12.5px; line-height: 1.6; color: var(--ink-45);
-    margin-top: auto; padding-top: 12px; border-top: 1px solid var(--hairline);
-  }
-  .beat p:not(.eg) { margin-bottom: 14px; }
-
-  /* ---- install steps ---- */
-  .steps { margin-top: 34px; border-top: 1px solid var(--hairline); }
-  .step {
-    display: grid; grid-template-columns: 58px 1fr; gap: 18px; align-items: start;
-    padding: 22px 4px; border-bottom: 1px solid var(--hairline);
-  }
-  .step .idx {
-    font-family: var(--mono); font-weight: 600; font-size: 22px; color: var(--amber-deep);
-    border: 1.5px solid var(--amber); background: var(--amber-tint); width: 48px; height: 48px;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .step h3 { font-family: var(--ui); font-weight: 700; font-size: 20px; margin: 4px 0 6px; }
-  .step p { font-family: var(--serif); color: var(--ink-70); font-size: 16px; margin: 0 0 12px; max-width: 56ch; }
-  .step .mini-note { font-family: var(--mono); font-size: 12px; color: var(--ink-45); letter-spacing: 0.02em; }
-  .step .btn { font-size: 13px; padding: 11px 18px; box-shadow: 3px 3px 0 var(--ink); }
-  .step .btn:hover { box-shadow: 5px 5px 0 var(--ink); }
-
-  .notebar {
-    margin-top: 26px; display: flex; gap: 0; border: 1.5px solid var(--amber);
-    background: var(--amber-tint);
-  }
-  .notebar .tick { width: 5px; background: var(--amber); flex: none; }
-  .notebar .txt { padding: 14px 16px; font-family: var(--cond); font-weight: 600; font-size: 15px; color: var(--ink); }
-
-  /* ---- trust strip ---- */
-  .trust { background: var(--ink); color: var(--paper); }
-  .trust .kicker { color: var(--amber); }
-  .trust h2 { color: var(--paper); }
-  .trust .sub-lead { color: #CFC9B8; }
-  .trust .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 42px; }
-  .trust .item { border-top: 1px solid #3A362E; padding-top: 16px; }
-  @media (max-width: 720px) { .trust .grid { grid-template-columns: 1fr; } }
-  .trust .item h3 { font-family: var(--ui); font-weight: 700; font-size: 18px; margin: 0 0 8px; }
-  .trust .item p { font-family: var(--serif); color: #D8D3C4; font-size: 15px; margin: 0; }
-  .trust .item .ic {
-    font-family: var(--mono); color: var(--amber-deep); font-size: 10.5px;
-    font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
-  }
-
-  /* ---- get it (closing call) ---- */
-  .get .card {
-    margin-top: 30px; background: var(--sheet); border: 2px solid var(--ink);
-    box-shadow: 8px 8px 0 rgba(23,21,15,0.10); padding: clamp(22px, 4vw, 34px);
-    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px 28px;
-  }
-  .get .card > * { min-width: 0; }
-  .get .card .what { font-family: var(--cond); font-weight: 600; font-size: 17px; color: var(--ink); }
-  .get .card .what .fine { display: block; margin-top: 6px; font-family: var(--mono); font-weight: 400; font-size: 12px; letter-spacing: 0.04em; color: var(--ink-45); }
-
-  /* ---- footer ---- */
-  footer { border-top: 2px solid var(--ink); padding: 34px 0 46px; }
-  footer .wrap { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; }
-  footer .fine { font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em; color: var(--ink-45); }
-  footer a.link { color: var(--amber-deep); text-decoration: none; border-bottom: 1px solid var(--amber); }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/style.css" />
+<script>if (/\.github\.io$/.test(location.hostname)) location.replace('https://usejefe.com' + location.pathname.replace(/^\/jefe-beta(\/public)?/, ''));</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Jefe","operatingSystem":"iOS","applicationCategory":"BusinessApplication","url":"https://usejefe.com/","downloadUrl":"https://apps.apple.com/us/app/jefe-voice-estimate-maker/id6761315709","image":"https://usejefe.com/img/og.png","description":"Jefe turns a spoken walk-through into a ready-to-send estimate draft. iPhone only. First five walks free, then $29.99 a month or $299.99 a year.","offers":[{"@type":"Offer","price":"29.99","priceCurrency":"USD","description":"$29.99 a month"},{"@type":"Offer","price":"299.99","priceCurrency":"USD","description":"$299.99 a year"}],"author":{"@type":"Person","name":"Isaac Wallace-Menge"}}</script>
 </head>
-
 <body>
-
-<!-- ============ TOP BAR ============ -->
+<a class="skip" href="#content">Skip to content</a>
 <header class="bar">
   <div class="wrap">
-    <a class="logo" href="#top"><span class="mark"></span><span class="word">JEFE</span></a>
-    <span class="meta">On the App Store</span>
+    <a class="logo" href="/"><img src="/img/icon-512.png" width="32" height="32" alt="" />Jefe</a>
+    <nav class="nav" aria-label="Primary">
+      <a class="nav-link" href="/calculators/">Calculators</a>
+      <a class="nav-link" href="/support">Support</a>
+      <a class="btn btn-amber btn-small" href="https://apps.apple.com/us/app/jefe-voice-estimate-maker/id6761315709" target="_blank" rel="noopener">Get the app</a>
+    </nav>
   </div>
 </header>
-
-<a id="top"></a>
-
-<!-- ============ HERO ============ -->
-<div class="hero wrap">
-  <div class="hero-grid">
-    <div>
-      <span class="stamp">Now on the App Store</span>
-      <h1>Say it out&nbsp;loud.<br>Get the paperwork.</h1>
-      <p class="lead">Walk the job and talk it through, like you're telling a helper. Jefe writes up the estimate before you're back in the truck.</p>
-      <div class="ctas">
-        <a class="badge" href="https://apps.apple.com/app/id6761315709" target="_blank" rel="noopener"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us" alt="Download Jefe on the App Store" width="150" height="50" /></a>
-        <a class="btn ghost" href="#how">See how it works</a>
-      </div>
-      <p class="fine">iPhone · first five walks free, no card · for landscapers, property managers &amp; home inspectors</p>
-    </div>
-
-    <!-- the real thing: a screenshot of the estimate Jefe writes -->
-    <figure class="shot">
-      <div class="device">
-        <img src="/img/estimate.png" width="990" height="2151"
-             alt="An estimate Jefe wrote from a spoken walk-through: Bluestem Landscape, Denver CO, with line items for bark mulch, boxwood trim, an irrigation head and bed edging." />
-      </div>
-      <figcaption>An estimate Jefe wrote from one walk. Every line is editable.</figcaption>
-    </figure>
-  </div>
-</div>
-
-<hr class="divider" />
-
-<!-- ============ HOW IT WORKS ============ -->
-<section id="how">
-  <div class="wrap sec-head">
-    <span class="kicker">How it works</span>
-    <h2>Three steps. No typing.</h2>
-    <p class="sub-lead">If you can talk through a job, you can use Jefe.</p>
-  </div>
-  <div class="wrap beats">
-    <div class="beat">
-      <div class="top">
-        <span class="n">01</span>
-        <svg viewBox="0 0 34 34" aria-hidden="true" focusable="false">
-            <path class="ln" d="M4 17h2.5"/><path class="ln" d="M9 12.5v9"/>
-            <path class="hi" d="M13.5 7.5v19"/><path class="hi" d="M18 11v12"/>
-            <path class="ln" d="M22.5 8.5v17"/><path class="ln" d="M27 13.5v7"/><path class="ln" d="M30 16h0.5"/>
-          </svg>
-      </div>
-      <h3>Walk &amp; talk</h3>
-      <p>Tap once and talk. Jefe listens the whole time and writes down what matters &mdash; even with the phone in your pocket.</p>
-      <p class="eg">&ldquo;Front beds need mulch, call it three yards&hellip; zone two head is broken, replace it.&rdquo;</p>
-    </div>
-    <div class="beat">
-      <div class="top">
-        <span class="n">02</span>
-        <svg viewBox="0 0 34 34" aria-hidden="true" focusable="false">
-            <path class="ln" d="M5 9h17"/><path class="ln" d="M5 15.5h11"/><path class="ln" d="M5 22h20"/>
-            <path class="hi" d="M19.5 15.5h9"/>
-            <path class="ln" d="M24 28.5h6"/>
-          </svg>
-      </div>
-      <h3>Fix anything</h3>
-      <p>It's a first draft, not a verdict. Tap any line to fix a word, change a quantity, or put your price on it.</p>
-      <p class="eg">Jefe flags what it didn't hear, so nothing gets quoted by accident.</p>
-    </div>
-    <div class="beat">
-      <div class="top">
-        <span class="n">03</span>
-        <svg viewBox="0 0 34 34" aria-hidden="true" focusable="false">
-            <path class="ln" d="M6 4.5h13l6 6V27a2.5 2.5 0 0 1-2.5 2.5H6A2.5 2.5 0 0 1 3.5 27V7A2.5 2.5 0 0 1 6 4.5Z"/>
-            <path class="ln" d="M19 4.5v6h6"/>
-            <path class="hi" d="M11 20h10"/><path class="hi" d="M17.5 16.5 21 20l-3.5 3.5"/>
-          </svg>
-      </div>
-      <h3>Send it</h3>
-      <p>Turn it into an estimate, invoice, work order or report with your letterhead on it.</p>
-      <p class="eg">Text it, email it, or save the PDF before you leave the driveway.</p>
-    </div>
-  </div>
-</section>
-
-<hr class="divider" />
-
-<!-- ============ INSTALL ============ -->
-<section id="install">
-  <div class="wrap sec-head">
-    <span class="kicker">Get it on your phone</span>
-    <h2>Download it and talk.</h2>
-    <p class="sub-lead">Jefe is on the App Store. No invite, no sign-up, no account to make &mdash; open it and you can walk a job in under a minute.</p>
-  </div>
-
-  <div class="wrap steps">
-    <div class="step">
-      <div class="idx">1</div>
+<main id="content">
+  <section class="hero">
+    <div class="wrap hero-grid">
       <div>
-        <h3>Get Jefe</h3>
-        <p>Free to download. Open this on your iPhone and tap through.</p>
-        <a class="btn" href="https://apps.apple.com/app/id6761315709" target="_blank" rel="noopener">Download on the App Store →</a>
-        <p class="mini-note" style="margin-top:10px">On a computer? Text yourself this page and open it on your iPhone.</p>
+        <span class="kicker">Now on the App Store</span>
+        <h1>Say it out loud.<br />Get the paperwork.</h1>
+        <p class="lead">Walk the job and talk it through, like you're telling a helper. Jefe writes up the estimate before you're back in the truck.</p>
+        <div class="ctas">
+          <a class="badge" href="https://apps.apple.com/us/app/jefe-voice-estimate-maker/id6761315709" target="_blank" rel="noopener"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us" alt="Download Jefe on the App Store" width="150" height="50" /></a>
+          <a class="btn btn-ghost" href="#how">See how it works</a>
+        </div>
+        <p class="fine">iPhone · first five walks free, no card · for landscapers, property managers &amp; home inspectors</p>
+      </div>
+      <div class="phone-stage">
+        <div class="orb" aria-hidden="true"></div>
+        <figure class="shot">
+          <div class="device">
+            <img src="/img/estimate.png" width="990" height="2151" alt="An estimate Jefe wrote from a spoken walk-through: Bluestem Landscape, Denver CO, with line items for bark mulch, boxwood trim, an irrigation head and bed edging." />
+          </div>
+          <figcaption>An estimate Jefe wrote from one walk. Every line is editable.</figcaption>
+        </figure>
       </div>
     </div>
+  </section>
 
-    <div class="step">
-      <div class="idx">2</div>
-      <div>
-        <h3>Try the practice walk</h3>
-        <p>Thirty seconds, no real job on the line. It shows you what Jefe hears and what it writes.</p>
+  <section class="block" id="how">
+    <div class="wrap">
+      <span class="kicker">How it works</span>
+      <h2>Three steps. No typing.</h2>
+      <p class="sub">If you can talk through a job, you can use Jefe.</p>
+      <div class="cards">
+        <article class="card">
+          <div class="n">01</div>
+          <h3>Walk &amp; talk</h3>
+          <p>Tap once and talk. Jefe listens the whole time and writes down what matters &mdash; even with the phone in your pocket.</p>
+          <p class="eg">&ldquo;Front beds need mulch, call it three yards&hellip; zone two head is broken, replace it.&rdquo;</p>
+        </article>
+        <article class="card">
+          <div class="n">02</div>
+          <h3>Fix anything</h3>
+          <p>It's a first draft, not a verdict. Tap any line to fix a word, change a quantity, or put your price on it.</p>
+          <p class="eg">Jefe flags what it didn't hear, so nothing gets quoted by accident.</p>
+        </article>
+        <article class="card">
+          <div class="n">03</div>
+          <h3>Send it</h3>
+          <p>Turn it into an estimate, invoice, work order or report with your letterhead on it.</p>
+          <p class="eg">Text it, email it, or save the PDF before you leave the driveway.</p>
+        </article>
       </div>
     </div>
+  </section>
 
-    <div class="step">
-      <div class="idx">3</div>
-      <div>
-        <h3>Walk a real one</h3>
-        <p>Hit record, talk through the job, and read the draft in the truck. Your first five walks are free &mdash; no card, nothing to cancel.</p>
+  <section class="block" id="calculators" style="padding-top:0">
+    <div class="wrap">
+      <span class="kicker">Calculators</span>
+      <h2>Work the numbers first.</h2>
+      <p class="sub">Area, concrete, mulch, gravel, topsoil, sand, and markup. The same math as the app. A blank price stays blank.</p>
+      <div class="tool-grid">
+        <a class="tool-card" href="/calculators/area-volume"><strong>Area &amp; volume</strong><span>Square feet and cubic yards from a measurement.</span></a>
+        <a class="tool-card" href="/concrete"><strong>Concrete</strong><span>Cubic yards and bags for a slab.</span></a>
+        <a class="tool-card" href="/mulch"><strong>Mulch</strong><span>Yards for a bed, starting at 3 inches.</span></a>
+        <a class="tool-card" href="/markup-margin"><strong>Markup &amp; margin</strong><span>Turn a cost you type into a bid.</span></a>
+      </div>
+      <p class="fine"><a href="/calculators/">All calculators</a></p>
+    </div>
+  </section>
+
+  <section class="block" id="install" style="padding-top:0">
+    <div class="wrap">
+      <span class="kicker">Get it on your phone</span>
+      <h2>Download it and talk.</h2>
+      <p class="sub">Jefe is on the App Store. No invite, no sign-up, no account to make &mdash; open it and you can walk a job in under a minute.</p>
+      <div class="steps">
+        <div class="step"><div class="idx">1</div><div><h3>Get Jefe</h3><p>Free to download. Open this on your iPhone and tap through.</p><p style="margin-top:12px"><a class="badge" href="https://apps.apple.com/us/app/jefe-voice-estimate-maker/id6761315709" target="_blank" rel="noopener"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us" alt="Download Jefe on the App Store" width="150" height="50" /></a></p></div></div>
+        <div class="step"><div class="idx">2</div><div><h3>Try the practice walk</h3><p>Thirty seconds, no real job on the line. It shows you what Jefe hears and what it writes.</p></div></div>
+        <div class="step"><div class="idx">3</div><div><h3>Walk a real one</h3><p>Hit record, talk through the job, and read the draft in the truck. Your first five walks are free &mdash; no card, nothing to cancel.</p></div></div>
+      </div>
+      <p class="note">iPhone only for now. There's no Android version yet.</p>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <span class="kicker">Why it's different</span>
+      <h2>Made for the field.</h2>
+      <p class="sub">The three questions people ask before they trust an app with a client's job.</p>
+      <div class="band-grid">
+        <div>
+          <div class="kicker">Privacy</div>
+          <h3>Your audio never leaves your phone</h3>
+          <p>The listening happens on your device &mdash; your voice is never uploaded. To write the paperwork, the typed-out words go to our AI provider and come back as your document. Your work is never used to train AI models. <a href="/privacy">How it works</a></p>
+        </div>
+        <div>
+          <div class="kicker">Control</div>
+          <h3>You're in control of every word</h3>
+          <p>What Jefe hears is a first draft, and every line of it is yours to change. It marks the things it didn't catch instead of guessing, so you are never sending a number you didn't choose.</p>
+        </div>
+        <div>
+          <div class="kicker">Price</div>
+          <h3>Five walks free, then decide</h3>
+          <p>Try it on five real jobs before you pay a cent, with no card up front. After that it's $29.99 a month or $299.99 a year, cancelled in your iPhone settings like anything else.</p>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 
+  <section class="block" id="get">
+    <div class="wrap">
+      <span class="kicker">Get Jefe</span>
+      <h2>Walk your next job with it.</h2>
+      <p class="sub">Free to download. Your first five walks are free &mdash; no card, nothing to cancel.</p>
+      <div class="close-card">
+        <p>Jefe for iPhone<span class="fine">No account, no sign-up. Open it and walk a job.</span></p>
+        <a class="badge" href="https://apps.apple.com/us/app/jefe-voice-estimate-maker/id6761315709" target="_blank" rel="noopener"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us" alt="Download Jefe on the App Store" width="150" height="50" /></a>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
   <div class="wrap">
-    <div class="notebar">
-      <div class="tick"></div>
-      <div class="txt">iPhone only for now. There's no Android version yet.</div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ TRUST ============ -->
-<section class="trust">
-  <div class="wrap sec-head">
-    <span class="kicker">Why it's different</span>
-    <h2>Made for the field.</h2>
-    <p class="sub-lead">The three questions people ask before they trust an app with a client's job.</p>
-  </div>
-  <div class="wrap grid">
-    <div class="item">
-      <div class="ic">Privacy</div>
-      <h3>Your audio never leaves your phone</h3>
-      <p>The listening happens on your device &mdash; your voice is never uploaded. To write the paperwork, the typed-out words go to our AI provider and come back as your document. Your work is never used to train AI models. <a href="/privacy">How it works &rsaquo;</a></p>
-    </div>
-    <div class="item">
-      <div class="ic">Control</div>
-      <h3>You're in control of every word</h3>
-      <p>What Jefe hears is a first draft, and every line of it is yours to change. It marks the things it didn't catch instead of guessing, so you are never sending a number you didn't choose.</p>
-    </div>
-    <div class="item">
-      <div class="ic">Price</div>
-      <h3>Five walks free, then decide</h3>
-      <p>Try it on five real jobs before you pay a cent, with no card up front. After that it's $39.99 a month or $299.99 a year, cancelled in your iPhone settings like anything else.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============ GET IT ============ -->
-<section id="get" class="get">
-  <div class="wrap sec-head">
-    <span class="kicker">Get Jefe</span>
-    <h2>Walk your next job with it.</h2>
-    <p class="sub-lead">Free to download. Your first five walks are free &mdash; no card, nothing to cancel.</p>
-  </div>
-
-  <div class="wrap">
-    <div class="card">
-      <p class="what">Jefe for iPhone<span class="fine">No account, no sign-up. Open it and walk a job.</span></p>
-      <a class="badge" href="https://apps.apple.com/app/id6761315709" target="_blank" rel="noopener"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us" alt="Download Jefe on the App Store" width="150" height="50" /></a>
-    </div>
-  </div>
-</section>
-
-<!-- ============ FOOTER ============ -->
-<footer>
-  <div class="wrap">
-    <a class="logo" href="#top"><span class="mark"></span><span class="word">JEFE</span></a>
-    <div class="fine">
-      Voice to paperwork for the field. Your audio never leaves your phone.<br>
-      Jefe is built by Isaac Wallace-Menge, a one-person shop in California. If you email, you get me.<br>
-      <a class="link" href="/terms">Terms</a> · <a class="link" href="/privacy">Privacy</a> ·
-      Questions? <a class="link" href="mailto:damsac.app@gmail.com">damsac.app@gmail.com</a>
-    </div>
+    <a class="logo" href="/"><img src="/img/icon-512.png" width="32" height="32" alt="" />Jefe</a>
+    <p class="fine">Voice to paperwork for the field. Your audio never leaves your phone.<br />
+      Jefe is built by Isaac Wallace-Menge, a one-person shop in California. If you email, you get me.<br />
+      <a href="/">Home</a> · <a href="/calculators/">Calculators</a> · <a href="/support">Support</a> ·
+      <a href="/terms">Terms</a> · <a href="/privacy">Privacy</a> ·
+      <a href="mailto:damsac.app@gmail.com">damsac.app@gmail.com</a>
+    </p>
   </div>
 </footer>
 

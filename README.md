@@ -2,20 +2,34 @@
 
 The public website for [Jefe](https://apps.apple.com/app/id6761315709), the iOS
 app that turns a spoken site walk into notes, estimates and work orders.
-It's three static pages and nothing else, in `public/`:
+The pages are static HTML in `public/`, plus `calc.js` for the calculators.
+There is no build step and no dependency to install.
 
 | File | Served at | Who links to it |
 |------|-----------|-----------------|
 | `public/index.html` | `/` | App Store support + marketing URL |
+| `public/calculators/index.html` | `/calculators/` | Homepage |
+| `public/calculators/area-volume.html` | `/calculators/area-volume` | Calculators hub |
+| `public/concrete.html` | `/concrete` | Calculators hub |
+| `public/mulch.html` | `/mulch` | Calculators hub |
+| `public/gravel.html` | `/gravel` | Calculators hub |
+| `public/topsoil.html` | `/topsoil` | Calculators hub |
+| `public/sand.html` | `/sand` | Calculators hub |
+| `public/markup-margin.html` | `/markup-margin` | Calculators hub |
+| `public/support.html` | `/support` | Header and footer |
 | `public/privacy.html` | `/privacy` | App Store privacy URL, the app's legal screen |
 | `public/terms.html` | `/terms` | App Store description, the app's legal screen |
 
-`public/img/` holds the screenshot the landing page uses. `public/robots.txt`
-and `public/sitemap.xml` point crawlers at the canonical host. There is no build
-step and no dependency to install. The pages carry one line of script, which
-redirects the GitHub Pages copy (see below). Built in the app's "Field
-Instrument" look (paper, ink, amber, the same fonts as the app) so it reads as
-part of the product.
+`/privacy.html` and `/terms.html` still resolve. With `html_handling` set to
+`auto-trailing-slash`, those `.html` URLs redirect to `/privacy` and `/terms`.
+The iOS app links to the `.html` paths, so the files stay named that way.
+
+`public/img/` holds the estimate screenshot, the app icon, and the social card.
+`public/robots.txt` and `public/sitemap.xml` point crawlers at the canonical
+host, `https://usejefe.com/`. The pages carry one line of script, which
+redirects the GitHub Pages copy (see below), and the calculator pages load
+`calc.js` and `concrete-ui.js`. The look is the approved B1 design: Plus Jakarta
+Sans, amber `#FFB800`, a cream page.
 
 Only `public/` is ever served. This README, `docs/`, `.github/`,
 `netlify.toml` and `wrangler.jsonc` stay in the repo and never reach the site.
@@ -85,8 +99,20 @@ npx wrangler dev          # http://localhost:8787, same routing as production
 cd public && python3 -m http.server 8000
 ```
 
-`wrangler dev` runs the real asset rules, including `/privacy` → `privacy.html`.
-A plain static server only answers to the `.html` names.
+`wrangler dev` runs the real asset rules, including `/privacy` → `privacy.html`
+and `/concrete` → `concrete.html`. A plain static server only answers to the
+`.html` names.
+
+## Calculator tests
+
+`public/calc.js` is the same math as the iOS app's `Calculators.swift`. A blank
+price is not `$0`. Run the tests with Node (no install):
+
+```bash
+node --test public/calc.test.js
+```
+
+`public/calc.test.js` is in `public/.assetsignore`, so it is not uploaded.
 
 ## www
 
