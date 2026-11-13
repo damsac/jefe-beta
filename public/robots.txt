@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://usejefe.com/sitemap.xml
