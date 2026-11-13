@@ -33,13 +33,11 @@ Only `public/` is ever served. This README, `docs/`, `.github/`,
 - `/privacy` and `/terms` serve the pages. `/privacy.html` and `/terms.html`
   307 to them, which is Cloudflare's default HTML handling, so links in both
   shapes land.
-- **Netlify** (`getjefe.netlify.app`) used to host the site, and for now still
-  serves the same pages from `public/`. App Store Connect and every shipped build
-  link to `getjefe.netlify.app/privacy.html`, `/terms.html`, `/terms` and `/`,
-  so that address has to keep answering. Once usejefe.com is verified serving,
-  a follow-up change turns `netlify.toml` into a 301 forwarder to the same path
-  on usejefe.com. **That forwarder must not go live before usejefe.com serves.**
-  Leave the Netlify site connected either way.
+- **Netlify** (`getjefe.netlify.app`) used to host the site. It now only
+  forwards: `netlify.toml` 301s every path to the same path on usejefe.com.
+  It has to stay up, because App Store Connect and every shipped build still
+  link to `getjefe.netlify.app/privacy.html`, `/terms.html`, `/terms` and `/`.
+  Netlify still deploys `main` to do this, so leave the Netlify site connected.
 - **GitHub Pages** is still switched on for this repo. Since the pages moved
   into `public/`, it no longer serves them at their old paths. Switch it off
   under Settings → Pages.
