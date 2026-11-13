@@ -81,21 +81,32 @@ h1 {
   align-items: center;
   justify-content: space-between;
   gap: 16px 24px;
-  min-height: 72px;
+  min-height: 84px;
   flex-wrap: wrap;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 12px;
+  padding-bottom: 12px;
 }
 .logo {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   text-decoration: none;
   font-weight: 800;
-  font-size: 22px;
+  font-size: 24px;
   letter-spacing: -0.03em;
 }
-.logo img { width: 32px; height: 32px; border-radius: 8px; display: block; }
+.logo img { width: 48px; height: 48px; border-radius: 12px; display: block; }
+.hero-kicker {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.hero-kicker img {
+  width: 72px;
+  height: 72px;
+  border-radius: 18px;
+  display: block;
+}
 .nav {
   display: flex;
   align-items: center;
@@ -247,10 +258,11 @@ h1 {
 .step {
   display: grid;
   grid-template-columns: 52px minmax(0, 1fr);
-  gap: 14px;
-  padding: 18px 0;
+  gap: 16px;
+  padding: 22px 0;
   border-top: 1px solid var(--line);
 }
+.step-action { margin-top: 14px; }
 .step .idx {
   width: 44px;
   height: 44px;
@@ -293,15 +305,30 @@ h1 {
   background: var(--white);
   border: 1px solid var(--line);
   border-radius: 24px;
-  padding: clamp(20px, 4vw, 32px);
-  display: flex;
-  flex-wrap: wrap;
+  padding: 24px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px 24px;
+  gap: 18px 22px;
 }
-.close-card p { font-weight: 700; font-size: 18px; }
-.close-card .fine { font-weight: 600; }
+.close-card img.close-mark {
+  width: 84px;
+  height: 84px;
+  border-radius: 20px;
+  display: block;
+}
+.close-title {
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: -0.03em;
+}
+.close-sub {
+  margin-top: 6px;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink-70);
+  max-width: 36ch;
+}
 
 /* tool cards */
 .tool-grid {
@@ -346,7 +373,7 @@ h1 {
   border-radius: 22px;
   padding: 18px 18px 16px;
   position: sticky;
-  top: 88px;
+  top: 104px;
 }
 .calc-card h2 { font-size: 16px; letter-spacing: 0.08em; text-transform: uppercase; color: #7A5600; }
 
@@ -552,6 +579,8 @@ table.assumptions {
   .phone-stage { min-height: 480px; }
   .orb { width: min(340px, 86vw); }
   .hero-grid .phone-stage { order: 2; }
+  .close-card { grid-template-columns: auto minmax(0, 1fr); }
+  .close-card .badge { grid-column: 1 / -1; justify-self: start; }
 }
 
 @media (max-width: 520px) {
