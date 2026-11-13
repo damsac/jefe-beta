@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://usejefe.com/</loc></url>
+  <url><loc>https://usejefe.com/calculators/</loc></url>
+  <url><loc>https://usejefe.com/calculators/area-volume</loc></url>
+  <url><loc>https://usejefe.com/concrete</loc></url>
+  <url><loc>https://usejefe.com/mulch</loc></url>
+  <url><loc>https://usejefe.com/gravel</loc></url>
+  <url><loc>https://usejefe.com/topsoil</loc></url>
+  <url><loc>https://usejefe.com/sand</loc></url>
+  <url><loc>https://usejefe.com/markup-margin</loc></url>
   <url><loc>https://usejefe.com/privacy</loc></url>
   <url><loc>https://usejefe.com/terms</loc></url>
+  <url><loc>https://usejefe.com/support</loc></url>
 </urlset>
