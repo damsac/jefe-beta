@@ -1,8 +1,5 @@
 .DS_Store
 
-# Local Netlify folder
-.netlify
-
 # Local Wrangler state
 .wrangler
 node_modules
