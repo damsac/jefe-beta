@@ -1,11 +1,19 @@
-# Netlify is on its way out. usejefe.com is a Cloudflare Worker (see
-# wrangler.jsonc). Until usejefe.com is verified serving, Netlify keeps
-# serving the same pages at getjefe.netlify.app, because App Store Connect and
-# every shipped build link there (/privacy.html, /terms, /terms.html, /).
-# The pages moved into public/, so that is the publish directory.
-# The follow-up PR turns this into a 301 forwarder to usejefe.com. It must
-# not land before usejefe.com serves, or every old link forwards to nothing.
+# Netlify no longer hosts this site. usejefe.com is a Cloudflare Worker (see
+# wrangler.jsonc). What's left here is a forwarding address: App Store Connect
+# and every shipped build still link to getjefe.netlify.app, so every path on it
+# 301s to the same path on usejefe.com.
+#   getjefe.netlify.app/privacy.html  (ASC privacy URL, the app's legal screen)
+#   getjefe.netlify.app/terms(.html)  (listing description, the app)
+#   getjefe.netlify.app/              (support + marketing URL)
+# force = true because the files exist in the publish directory; without it
+# Netlify would serve them instead of redirecting.
 
 [build]
   publish = "public"
   command = ""
+
+[[redirects]]
+  from = "/*"
+  to = "https://usejefe.com/:splat"
+  status = 301
+  force = true
