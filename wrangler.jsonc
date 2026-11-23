@@ -3,8 +3,8 @@
 	"name": "jefe-site",
 	"compatibility_date": "2026-10-20",
 
-	// Everything served lives in public/. README, docs/, .github/, netlify.toml
-	// and this file sit outside it, so they are never uploaded.
+	// Everything served lives in public/. README, docs/, .github/ and this
+	// file sit outside it, so they are never uploaded.
 	"assets": {
 		"directory": "./public",
 		// Default, stated so nobody has to look it up: /privacy serves
